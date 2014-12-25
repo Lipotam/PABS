@@ -10,14 +10,14 @@ digital pin 8 - fifth player button
 digital pin 9 - speaker pin
 digital pin 10 - led shift register clk 
 digital pin 11 - led shift register data 
-digital pin 12 - led shift register shift
+digital pin 12 - led shift register refresh
 digital pin 13
 
 analog pin 0 - display shift register clk 
 analog pin 1 - display shift register data 
-analog pin 2 - display shift register shift
-analog pin 3
-analog pin 4
+analog pin 2 - display shift register refresh
+analog pin 3 - game state higth bit
+analog pin 4 - game state low bit
 analog pin 5
 analog pin 6
 analog pin 7
