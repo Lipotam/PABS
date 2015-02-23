@@ -5,6 +5,7 @@
 #include "BrainRingMode.h"
 #include "GameModeBase.h"
 #include "Constants.h"
+#include "TimerOne.h"  
 
 GameModeBase* gameMode;
 void setup()
@@ -33,8 +34,6 @@ void setup()
 	int lowModeValue = analogRead(Constants.gameStateLowBit);
 
 
-
-
 	if(highModeValue < Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
 	{
 		gameMode = new TestMode();
@@ -56,17 +55,76 @@ void setup()
 				if(highModeValue > Constants.analogSeparator && lowModeValue > Constants.analogSeparator)
 				{
 					gameMode = new WwwMode();
+					  Timer1.initialize(1000000);        
+				      Timer1.attachInterrupt(TimerInterrupt);
 				}
 			}
 		}
 	}
 
-
+	attachInterrupt(0,AdminInterrupt,HIGH);
+	attachInterrupt(1,UserInterrupt,HIGH);
 }
 
 void loop()
 {
 
-  /* add main program code here */
+}
 
+
+void AdminInterrupt()
+{
+	if(digitalRead(Constants.adminResetButton) == HIGH )
+	{
+		gameMode ->AdminButtonPush(Constants.adminReset);
+	}
+	else
+	{
+		if(digitalRead(Constants.adminStartButton) == HIGH )
+		{
+			gameMode ->AdminButtonPush(Constants.adminSet);
+		}
+	}
+}
+
+void UserInterrupt()
+{
+	if (digitalRead(Constants.firstPlayerButton) == HIGH)
+	{
+		gameMode ->PlayerButtonPush(Constants.player1);
+	}
+	else
+	{
+		if (digitalRead(Constants.secondPlayerButton) == HIGH)
+		{
+			gameMode ->PlayerButtonPush(Constants.player2);
+		}
+		else
+		{
+			if (digitalRead(Constants.thirdPlayerButton) == HIGH)
+			{
+				gameMode ->PlayerButtonPush(Constants.player3);
+			}
+			else
+			{
+				if (digitalRead(Constants.fourthPlayerButton) == HIGH)
+				{
+					gameMode ->PlayerButtonPush(Constants.player4);
+				}
+				else
+				{
+					if (digitalRead(Constants.fifthPlayerButton) == HIGH)
+					{
+						gameMode ->PlayerButtonPush(Constants.player5);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+void TimerInterrupt()
+{
+   gameMode ->PlayerButtonPush(Constants.player5);
 }

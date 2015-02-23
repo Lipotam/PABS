@@ -72,6 +72,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <SystemMethods.h>
 #include <TestMode.cpp>
 #include <TestMode.h>
+#include <TimerOne.cpp>
+#include <TimerOne.h>
 #include <WwwMode.cpp>
 #include <WwwMode.h>
 #endif
