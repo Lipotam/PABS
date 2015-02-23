@@ -1,7 +1,7 @@
-// WwwMode.h
+// TestMode.h
 
-#ifndef _WWWMODE_h
-#define _WWWMODE_h
+#ifndef _TESTMODE_h
+#define _TESTMODE_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "Arduino.h"
@@ -11,11 +11,11 @@
 
 #include "GameModeBase.h"
 
-class WwwMode: public GameModeBase
+class TestMode: public GameModeBase
 {
-  public:
-	  WwwMode();
-	  ~WwwMode();
+   public:
+	   TestMode();
+	   ~TestMode();
 	 void PlayerButtonPush(int playerNumber);
 	 void AdminButtonPush(int buttonNumber);
 	void init();

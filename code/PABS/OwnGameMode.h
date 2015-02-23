@@ -11,9 +11,11 @@
 
 #include "GameModeBase.h"
 
-class OwnGameModeClass: GameModeBase
+class OwnGameMode: public GameModeBase
 {
   public:
+	  OwnGameMode();
+	  ~OwnGameMode();
 	 void PlayerButtonPush(int playerNumber);
 	 void AdminButtonPush(int buttonNumber);
 	void init();

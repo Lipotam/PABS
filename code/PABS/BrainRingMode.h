@@ -14,6 +14,9 @@
 class BrainRingMode : public GameModeBase
 {
   public:
+	  BrainRingMode();
+	  ~BrainRingMode();
+
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
 	void init();

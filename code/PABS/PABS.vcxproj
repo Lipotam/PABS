@@ -77,6 +77,8 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GameModeBase.h" />
     <ClInclude Include="OwnGameMode.h" />
+    <ClInclude Include="SystemMethods.h" />
+    <ClInclude Include="TestMode.h" />
     <ClInclude Include="Visual Micro\.PABS.vsarduino.h" />
     <ClInclude Include="WwwMode.h" />
   </ItemGroup>
@@ -85,6 +87,8 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="GameModeBase.cpp" />
     <ClCompile Include="OwnGameMode.cpp" />
+    <ClCompile Include="SystemMethods.cpp" />
+    <ClCompile Include="TestMode.cpp" />
     <ClCompile Include="WwwMode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

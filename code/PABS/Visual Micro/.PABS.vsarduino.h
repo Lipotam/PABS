@@ -68,6 +68,10 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <GameModeBase.h>
 #include <OwnGameMode.cpp>
 #include <OwnGameMode.h>
+#include <SystemMethods.cpp>
+#include <SystemMethods.h>
+#include <TestMode.cpp>
+#include <TestMode.h>
 #include <WwwMode.cpp>
 #include <WwwMode.h>
 #endif

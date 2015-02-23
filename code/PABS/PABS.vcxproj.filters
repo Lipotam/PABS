@@ -36,6 +36,12 @@
     <ClInclude Include="WwwMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemMethods.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Constants.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WwwMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemMethods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

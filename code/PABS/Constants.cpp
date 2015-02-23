@@ -15,7 +15,7 @@ void ConstantsClass::init()
 	thirdPlayerButton = 6;
 	fourthPlayerButton = 7;
 	fifthPlayerButton = 8;
-	speakerButton = 9;
+	speakerPin = 9;
 	ledShiftRegisterClk = 10;
 	ledShiftRegisterData = 11;
 	ledShiftRegisterRefresh = 12;
@@ -31,6 +31,9 @@ void ConstantsClass::init()
 	player3 = 2;
 	player4 = 3;
 	player5 = 4;
+
+	adminSet = 0;
+	adminReset = 1;
 	
 	digit[0] =  0b00001000;
 	digit[1] =  0b00111110;
@@ -49,7 +52,9 @@ void ConstantsClass::init()
 	led[2] = 0b00010000;
 	led[3] = 0b00001000;
 	led[4] = 0b00000100;
+	led[5] = 0b00000000;
 
+    analogSeparator = 500;
 }
 
 
