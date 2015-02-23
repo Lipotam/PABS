@@ -11,13 +11,9 @@
 
 class GameModeBase
 {
- protected:
-
-
  public:
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
-	void init();
 };
 
 

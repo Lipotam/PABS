@@ -13,12 +13,14 @@
 
 class WwwMode: public GameModeBase
 {
+private:
+	int state;
+	int timeLeft;
   public:
 	  WwwMode();
 	  ~WwwMode();
 	 void PlayerButtonPush(int playerNumber);
 	 void AdminButtonPush(int buttonNumber);
-	void init();
 };
 
 
