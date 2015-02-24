@@ -19,7 +19,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 		status= 2;
 		state[playerNumber] = 1;
 		SystemMethodsObject.SetUserLed(playerNumber);
-		SystemMethodsObject.PlaySound(1000,800);
+		SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 	}
 	else
 	{
@@ -31,7 +31,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 				SystemMethodsObject.SetUserLed(playerNumber);
 				SystemMethodsObject.SetDisplayNumber(playerNumber+1);
 				status = 2;
-				SystemMethodsObject.PlaySound(1000,800);
+				SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 			}
 			else
 			{
@@ -41,7 +41,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 					SystemMethodsObject.SetUserLed(Constants.player1);
 					SystemMethodsObject.SetDisplayNumber(Constants.player1+1);
 					status = 2;
-					SystemMethodsObject.PlaySound(1000,800);
+					SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 				}
 				else
 				{
@@ -51,7 +51,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 						SystemMethodsObject.SetUserLed(Constants.player2);
 						SystemMethodsObject.SetDisplayNumber(Constants.player2+1);
 						status = 2;
-						SystemMethodsObject.PlaySound(1000,800);
+						SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 					}
 					else
 					{
@@ -61,7 +61,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 							SystemMethodsObject.SetUserLed(Constants.player3);
 							SystemMethodsObject.SetDisplayNumber(Constants.player3+1);
 							status = 2;
-							SystemMethodsObject.PlaySound(1000,800);
+							SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 						}
 						else
 						{
@@ -71,7 +71,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 								SystemMethodsObject.SetUserLed(Constants.player4);
 								SystemMethodsObject.SetDisplayNumber(Constants.player4+1);
 								status = 2;
-								SystemMethodsObject.PlaySound(1000,800);
+								SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 							}
 							else
 							{
@@ -81,7 +81,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 									SystemMethodsObject.SetUserLed(Constants.player5);
 									SystemMethodsObject.SetDisplayNumber(Constants.player5+1);
 									status = 2;
-									SystemMethodsObject.PlaySound(1000,800);
+									SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 								}
 							}
 						}
@@ -97,7 +97,7 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		SystemMethodsObject.PlaySound(1000,800);
+		SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		SystemMethodsObject.SetDisplayNumber(-1);
 	}
 	else
@@ -106,7 +106,7 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 		{
 			status = 1;
 			SystemMethodsObject.SetDisplayNumber(-1);
-			SystemMethodsObject.PlaySound(1000,800);
+			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		}
 	}
 }

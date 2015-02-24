@@ -68,7 +68,7 @@ void OwnGameMode::PlayerButtonPush(int playerNumber)
 				}
 			}
 		}
-		SystemMethodsObject.PlaySound(1000,800);
+		SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 	}
 }
 void OwnGameMode::AdminButtonPush(int buttonNumber)
@@ -76,14 +76,14 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		SystemMethodsObject.PlaySound(1000,800);
+		SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 	}
 	else
 	{
 		if(buttonNumber == Constants.adminSet)
 		{
 			status = 0;
-			SystemMethodsObject.PlaySound(1000,800);
+			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		}
 	}
 }

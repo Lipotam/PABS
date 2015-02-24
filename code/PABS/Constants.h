@@ -37,6 +37,12 @@ public:
 	int player3;
 	int player4;
 	int player5;
+
+	int signalPeriod;
+	int playerSignalPeriodFrequency;
+	int adminSignalPeriodFrequency;
+	int wwwTenSecondsLeftFrequency;
+	int wwwPeriodExpiredFrequency;
 	
 	int adminSet;
 	int adminReset;

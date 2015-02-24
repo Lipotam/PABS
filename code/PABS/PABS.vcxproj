@@ -79,6 +79,7 @@
     <ClInclude Include="OwnGameMode.h" />
     <ClInclude Include="SystemMethods.h" />
     <ClInclude Include="TestMode.h" />
+    <ClInclude Include="TimerOne.h" />
     <ClInclude Include="Visual Micro\.PABS.vsarduino.h" />
     <ClInclude Include="WwwMode.h" />
   </ItemGroup>
@@ -89,7 +90,11 @@
     <ClCompile Include="OwnGameMode.cpp" />
     <ClCompile Include="SystemMethods.cpp" />
     <ClCompile Include="TestMode.cpp" />
+    <ClCompile Include="TimerOne.cpp" />
     <ClCompile Include="WwwMode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="keywords.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

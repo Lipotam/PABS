@@ -23,12 +23,12 @@ void WwwMode::PlayerButtonPush(int playerNumber)
 
 	if (timeLeft == 10)
 	{
-		SystemMethodsObject.PlaySound(500,500);
+		SystemMethodsObject.PlaySound(Constants.wwwTenSecondsLeftFrequency, Constants.signalPeriod);
 	}
 
 	if (timeLeft == 0)
 	{
-		SystemMethodsObject.PlaySound(1000,800);
+		SystemMethodsObject.PlaySound(Constants.wwwPeriodExpiredFrequency, Constants.signalPeriod);
 		state = 0;
 	}
 }
@@ -46,7 +46,7 @@ void WwwMode::AdminButtonPush(int buttonNumber)
 		{
 			state = 1;
 			timeLeft = 60;
-			SystemMethodsObject.PlaySound(1000,800);
+			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		}
 	}
 }

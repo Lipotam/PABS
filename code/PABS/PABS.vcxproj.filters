@@ -42,6 +42,9 @@
     <ClInclude Include="SystemMethods.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimerOne.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Constants.cpp">
@@ -65,5 +68,11 @@
     <ClCompile Include="SystemMethods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TimerOne.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="keywords.txt" />
   </ItemGroup>
 </Project>

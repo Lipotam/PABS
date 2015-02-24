@@ -13,11 +13,11 @@ void TestMode::PlayerButtonPush(int playerNumber)
 {
 	SystemMethodsObject.SetDisplayNumber(playerNumber);
 	SystemMethodsObject.SetUserLed(playerNumber);
-	SystemMethodsObject.PlaySound(1000*playerNumber,1000);
+	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency * playerNumber,Constants.signalPeriod);
 }
 void TestMode::AdminButtonPush(int buttonNumber)
 {
 	SystemMethodsObject.SetDisplayNumber(10+buttonNumber);
 	SystemMethodsObject.SetUserLed(buttonNumber);
-	SystemMethodsObject.PlaySound(1000*(10+buttonNumber),1000);
+	SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency * (5+buttonNumber),Constants.signalPeriod);
 }

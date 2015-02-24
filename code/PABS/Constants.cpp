@@ -32,6 +32,11 @@ void ConstantsClass::init()
 	player4 = 3;
 	player5 = 4;
 
+	signalPeriod = 1000;
+	playerSignalPeriodFrequency = 1000;
+	adminSignalPeriodFrequency = 2000;
+	wwwTenSecondsLeftFrequency = 2000;
+	wwwPeriodExpiredFrequency = 3000;
 	adminSet = 0;
 	adminReset = 1;
 	
