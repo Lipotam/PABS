@@ -13,13 +13,18 @@
 
 class BrainRingMode : public GameModeBase
 {
+private:
+	bool state[5];
+	int status;
+
+	void ResetState();
+
   public:
 	  BrainRingMode();
 	  ~BrainRingMode();
 
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
-	void init();
 };
 
 

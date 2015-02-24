@@ -62,6 +62,8 @@ void setup()
 		}
 	}
 
+	SystemMethodsObject.SetDisplayNumber(-1);
+
 	attachInterrupt(0,AdminInterrupt,HIGH);
 	attachInterrupt(1,UserInterrupt,HIGH);
 }
