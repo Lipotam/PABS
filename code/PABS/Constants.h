@@ -26,7 +26,7 @@ public:
 	int ledShiftRegisterClk;
 	int ledShiftRegisterData;
 	int ledShiftRegisterRefresh;
-	int ledPin;
+	//int ledPin;
 	int displayShiftRegisterClk;
 	int displayShiftRegisterData;
 	int displayShiftRegisterRefresh;
@@ -52,6 +52,8 @@ public:
 
 
 	void init();
+	ConstantsClass();
+	~ConstantsClass();
 };
 
 extern ConstantsClass Constants;

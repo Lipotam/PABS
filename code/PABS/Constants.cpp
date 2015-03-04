@@ -6,8 +6,8 @@
 
 void ConstantsClass::init()
 {
-	adminStartButton = 0;
-	adminResetButton = 1;
+	adminStartButton = 13;
+	adminResetButton = 19;
 	adminInterrupt = 2;
 	playerInerrupt = 3;
 	firstPlayerButton = 4;
@@ -19,7 +19,7 @@ void ConstantsClass::init()
 	ledShiftRegisterClk = 10;
 	ledShiftRegisterData = 11;
 	ledShiftRegisterRefresh = 12;
-	ledPin = 13;
+	//ledPin = 13;
 	displayShiftRegisterClk = 14;
 	displayShiftRegisterData = 15;
 	displayShiftRegisterRefresh = 16;
@@ -59,9 +59,16 @@ void ConstantsClass::init()
 	led[4] = 0b00000100;
 	led[5] = 0b00000000;
 
-    analogSeparator = 500;
+    analogSeparator = 600;
 }
 
+ConstantsClass::ConstantsClass()
+{
+	init();
+}
 
+ConstantsClass::~ConstantsClass()
+{
+}
 ConstantsClass Constants;
 

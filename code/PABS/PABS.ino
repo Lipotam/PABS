@@ -24,7 +24,7 @@ void setup()
 	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
 	pinMode(Constants.ledShiftRegisterData, OUTPUT);
 	pinMode(Constants.ledShiftRegisterRefresh, OUTPUT);
-	pinMode(Constants.ledPin, OUTPUT);
+//pinMode(Constants.ledPin, OUTPUT);
 	pinMode(Constants.displayShiftRegisterClk, OUTPUT);
 	pinMode(Constants.displayShiftRegisterData, OUTPUT);
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
@@ -33,7 +33,6 @@ void setup()
 
 	int highModeValue = analogRead(Constants.gameStateHighBit);
 	int lowModeValue = analogRead(Constants.gameStateLowBit);
-
 
 	if(highModeValue < Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
 	{
@@ -61,7 +60,12 @@ void setup()
 					gameMode = new WwwMode();
 					  Timer1.initialize(1000000);        
 				      Timer1.attachInterrupt(TimerInterrupt);
-					  Serial.write("WwwMode");
+					  Serial.write("WwwMode!");
+
+					  Serial.print(highModeValue);
+					  Serial.print(lowModeValue);
+					  Serial.print(Constants.analogSeparator);
+					  Serial.print(Constants.adminSignalPeriodFrequency);
 				}
 			}
 		}

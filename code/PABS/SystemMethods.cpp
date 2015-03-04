@@ -44,12 +44,16 @@ void SystemMethods::SetUserLed(int number)
 	if(number ==-1)
 	{
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[5]);
+		Serial.print(Constants.led[5]);
 	}
 	else
 	{
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[number]);
+		Serial.print(Constants.led[number]);
 	}
 	
+	Serial.write("setLeds");
+
     digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
 }
 
