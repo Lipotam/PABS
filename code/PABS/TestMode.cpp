@@ -14,10 +14,12 @@ void TestMode::PlayerButtonPush(int playerNumber)
 	SystemMethodsObject.SetDisplayNumber(playerNumber);
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency * playerNumber,Constants.signalPeriod);
+	Serial.write("TestPlayerClicked");
 }
 void TestMode::AdminButtonPush(int buttonNumber)
 {
 	SystemMethodsObject.SetDisplayNumber(10+buttonNumber);
 	SystemMethodsObject.SetUserLed(buttonNumber);
 	SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency * (5+buttonNumber),Constants.signalPeriod);
+	Serial.write("TestAdminClicked");
 }
