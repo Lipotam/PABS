@@ -36,6 +36,7 @@ void setup()
 
 	if(highModeValue < Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
 	{
+		SystemMethodsObject.SetDisplayNumber(0);
 		gameMode = new TestMode();
 		Serial.write("TestMode");
 	}
@@ -43,6 +44,7 @@ void setup()
 	{
 		if(highModeValue < Constants.analogSeparator && lowModeValue > Constants.analogSeparator)
 		{
+			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new BrainRingMode();
 			Serial.write("BrainMode");
 		}
@@ -50,6 +52,7 @@ void setup()
 		{
 			if(highModeValue > Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
 			{
+				SystemMethodsObject.SetDisplayNumber(33);
 				gameMode = new OwnGameMode();
 				Serial.write("OwnGameMode");
 			}
@@ -57,22 +60,24 @@ void setup()
 			{
 				if(highModeValue > Constants.analogSeparator && lowModeValue > Constants.analogSeparator)
 				{
+					SystemMethodsObject.SetDisplayNumber(44);
 					gameMode = new WwwMode();
 					  Timer1.initialize(1000000);        
 				      Timer1.attachInterrupt(TimerInterrupt);
 					  Serial.write("WwwMode!");
 
-					  Serial.print(highModeValue);
-					  Serial.print(lowModeValue);
-					  Serial.print(Constants.analogSeparator);
-					  Serial.print(Constants.adminSignalPeriodFrequency);
 				}
 			}
 		}
 	}
+
+	Serial.print(highModeValue);
+	Serial.print(lowModeValue);
+	Serial.print(Constants.analogSeparator);
+
 	
 	Serial.write("setDisplay");
-	SystemMethodsObject.SetDisplayNumber(-1);
+	
 
 	Serial.write("setLeds");
 	SystemMethodsObject.SetUserLed(-1);
@@ -85,12 +90,15 @@ void setup()
 
 void loop()
 {
+	Serial.print(digitalRead(Constants.adminResetButton) == HIGH);
+	delay(1000);
 }
 
 
 void AdminInterrupt()
 {
 	noInterrupts();
+	Serial.write("AdminInt");
 	if(digitalRead(Constants.adminResetButton) == HIGH )
 	{
 		gameMode ->AdminButtonPush(Constants.adminReset);
@@ -110,7 +118,7 @@ void AdminInterrupt()
 void UserInterrupt()
 {
 	noInterrupts();
- 
+	Serial.write("UserInt");
 	if (digitalRead(Constants.firstPlayerButton) == HIGH)
 	{
 		gameMode ->PlayerButtonPush(Constants.player1);

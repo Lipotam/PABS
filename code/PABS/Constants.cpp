@@ -6,23 +6,23 @@
 
 void ConstantsClass::init()
 {
-	adminStartButton = 13;
-	adminResetButton = 19;
+	adminStartButton = 19;
+	adminResetButton = 13;
 	adminInterrupt = 2;
 	playerInerrupt = 3;
-	firstPlayerButton = 4;
-	secondPlayerButton = 5;
-	thirdPlayerButton = 6;
-	fourthPlayerButton = 7;
-	fifthPlayerButton = 8;
+	firstPlayerButton = 8;
+	secondPlayerButton = 7;
+	thirdPlayerButton = 4;
+	fourthPlayerButton = 6;
+	fifthPlayerButton = 5;
 	speakerPin = 9;
-	ledShiftRegisterClk = 10;
-	ledShiftRegisterData = 11;
-	ledShiftRegisterRefresh = 12;
+	ledShiftRegisterClk = 14;
+	ledShiftRegisterData = 15;
+	ledShiftRegisterRefresh = 16;
 	//ledPin = 13;
-	displayShiftRegisterClk = 14;
-	displayShiftRegisterData = 15;
-	displayShiftRegisterRefresh = 16;
+	displayShiftRegisterClk = 10;
+	displayShiftRegisterData = 11;
+	displayShiftRegisterRefresh = 12;
 	gameStateHighBit = 17;
 	gameStateLowBit = 18;
 
