@@ -12,63 +12,60 @@ OwnGameMode::OwnGameMode()
 }
 OwnGameMode::~OwnGameMode(){}
 
+
+void OwnGameMode::SetPlayerClick(int playerNumber)
+{
+	state[playerNumber] = 1;
+	SystemMethodsObject.SetUserLed(playerNumber);
+	SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
+	status = 1;
+	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+}
+
 void OwnGameMode::PlayerButtonPush(int playerNumber)
 {
 	if (status == 0)
 	{
-		status = 1;
 		if(state[playerNumber] == 0)
 		{
-			state[playerNumber] = 1;
-			SystemMethodsObject.SetUserLed(playerNumber);
-			SystemMethodsObject.SetDisplayNumber(playerNumber+1);
+			SetPlayerClick(playerNumber);
 		}
 		else
 		{
 			if (state[Constants.player1] == 0 && digitalRead(Constants.firstPlayerButton) == HIGH)
 			{
-				state[Constants.player1] = 1;
-				SystemMethodsObject.SetUserLed(Constants.player1);
-				SystemMethodsObject.SetDisplayNumber(Constants.player1+1);
+				SetPlayerClick(Constants.player1);
 			}
 			else
 			{
 				if (state[Constants.player2] == 0 && digitalRead(Constants.secondPlayerButton) == HIGH)
 				{
-					state[Constants.player2] = 1;
-					SystemMethodsObject.SetUserLed(Constants.player2);
-					SystemMethodsObject.SetDisplayNumber(Constants.player2+1);
+					SetPlayerClick(Constants.player2);
 				}
 				else
 				{
 					if (state[Constants.player3] == 0 && digitalRead(Constants.thirdPlayerButton) == HIGH)
 					{
-						state[Constants.player3] = 1;
-						SystemMethodsObject.SetUserLed(Constants.player3);
-						SystemMethodsObject.SetDisplayNumber(Constants.player3+1);
+						SetPlayerClick(Constants.player3);
 					}
 					else
 					{
 						if (state[Constants.player4] == 0 && digitalRead(Constants.fourthPlayerButton) == HIGH)
 						{
-							state[Constants.player4] = 1;
-							SystemMethodsObject.SetUserLed(Constants.player4);
-							SystemMethodsObject.SetDisplayNumber(Constants.player4+1);
+							SetPlayerClick(Constants.player4);
 						}
 						else
 						{
 							if (state[Constants.player5] == 0 && digitalRead(Constants.fifthPlayerButton) == HIGH)
 							{
-								state[Constants.player5] = 1;
-								SystemMethodsObject.SetUserLed(Constants.player5);
-								SystemMethodsObject.SetDisplayNumber(Constants.player5+1);
+								SetPlayerClick(Constants.player5);
 							}
 						}
 					}
 				}
 			}
 		}
-		SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+		
 	}
 }
 void OwnGameMode::AdminButtonPush(int buttonNumber)
@@ -77,6 +74,8 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	{
 		ResetState();
 		SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
+		SystemMethodsObject.SetUserLed(-1);
+		SystemMethodsObject.SetDisplayNumber(-1);
 	}
 	else
 	{
@@ -84,6 +83,8 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 		{
 			status = 0;
 			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
+			SystemMethodsObject.SetUserLed(-1);
+			SystemMethodsObject.SetDisplayNumber(-1);
 		}
 	}
 }
