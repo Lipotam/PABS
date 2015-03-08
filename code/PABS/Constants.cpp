@@ -34,6 +34,7 @@ void ConstantsClass::init()
 
 	signalPeriod = 1000;
 	playerSignalPeriodFrequency = 1000;
+	brainFaultStartFrequency = 500;
 	adminSignalPeriodFrequency = 2000;
 	wwwTenSecondsLeftFrequency = 2000;
 	wwwPeriodExpiredFrequency = 3000;

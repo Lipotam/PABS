@@ -43,7 +43,7 @@ public:
 	int adminSignalPeriodFrequency;
 	int wwwTenSecondsLeftFrequency;
 	int wwwPeriodExpiredFrequency;
-	
+	int brainFaultStartFrequency;
 	int adminSet;
 	int adminReset;
 	uint8_t digit[11];
