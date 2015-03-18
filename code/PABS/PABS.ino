@@ -24,7 +24,6 @@ void setup()
 	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
 	pinMode(Constants.ledShiftRegisterData, OUTPUT);
 	pinMode(Constants.ledShiftRegisterRefresh, OUTPUT);
-//pinMode(Constants.ledPin, OUTPUT);
 	pinMode(Constants.displayShiftRegisterClk, OUTPUT);
 	pinMode(Constants.displayShiftRegisterData, OUTPUT);
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
@@ -36,7 +35,7 @@ void setup()
 
 	if(highModeValue < Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
 	{
-		SystemMethodsObject.SetDisplayNumber(0);
+		SystemMethodsObject.SetDisplayNumber(11);
 		gameMode = new TestMode();
 		Serial.write("TestMode");
 	}
@@ -71,16 +70,7 @@ void setup()
 		}
 	}
 
-	Serial.print(highModeValue);
-	Serial.print(lowModeValue);
-	Serial.print(Constants.analogSeparator);
-
-	Serial.write("setDisplay");
-	
-
-	Serial.write("setLeds");
 	SystemMethodsObject.SetUserLed(-1);
-	Serial.write("setMusic");
 	SystemMethodsObject.PlaySound(1000,1000);
 
 	attachInterrupt(0,AdminInterrupt,RISING);
@@ -89,26 +79,21 @@ void setup()
 
 void loop()
 {
-	Serial.print(digitalRead(Constants.adminResetButton) == HIGH);
-	delay(1000);
 }
 
 
 void AdminInterrupt()
 {
 	noInterrupts();
-	Serial.write("AdminInt");
 	if(digitalRead(Constants.adminResetButton) == HIGH )
 	{
 		gameMode ->AdminButtonPush(Constants.adminReset);
-		Serial.write("AdminResetClicked");
 	}
 	else
 	{
 		if(digitalRead(Constants.adminStartButton) == HIGH )
 		{
 			gameMode ->AdminButtonPush(Constants.adminSet);
-			Serial.write("AdminSetClicked");
 		}
 	}
 	 interrupts();
@@ -117,39 +102,33 @@ void AdminInterrupt()
 void UserInterrupt()
 {
 	noInterrupts();
-	Serial.write("UserInt");
 	if (digitalRead(Constants.firstPlayerButton) == HIGH)
 	{
 		gameMode ->PlayerButtonPush(Constants.player1);
-		Serial.write("Player1Clicked");
 	}
 	else
 	{
 		if (digitalRead(Constants.secondPlayerButton) == HIGH)
 		{
 			gameMode ->PlayerButtonPush(Constants.player2);
-			Serial.write("Player2Clicked");
 		}
 		else
 		{
 			if (digitalRead(Constants.thirdPlayerButton) == HIGH)
 			{
 				gameMode ->PlayerButtonPush(Constants.player3);
-				Serial.write("Player3Clicked");
 			}
 			else
 			{
 				if (digitalRead(Constants.fourthPlayerButton) == HIGH)
 				{
 					gameMode ->PlayerButtonPush(Constants.player4);
-					Serial.write("Player4Clicked");
 				}
 				else
 				{
 					if (digitalRead(Constants.fifthPlayerButton) == HIGH)
 					{
 						gameMode ->PlayerButtonPush(Constants.player5);
-						Serial.write("Player5Clicked");
 					}
 				}
 			}
