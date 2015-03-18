@@ -38,6 +38,7 @@ void setup()
 		SystemMethodsObject.SetDisplayNumber(11);
 		gameMode = new TestMode();
 		Serial.write("TestMode");
+		attachInterrupt(1,UserInterrupt,RISING);
 	}
 	else
 	{
@@ -46,6 +47,7 @@ void setup()
 			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new BrainRingMode();
 			Serial.write("BrainMode");
+			attachInterrupt(1,UserInterrupt,RISING);
 		}
 		else
 		{
@@ -54,6 +56,7 @@ void setup()
 				SystemMethodsObject.SetDisplayNumber(33);
 				gameMode = new OwnGameMode();
 				Serial.write("OwnGameMode");
+				attachInterrupt(1,UserInterrupt,RISING);
 			}
 			else
 			{
@@ -61,9 +64,9 @@ void setup()
 				{
 					SystemMethodsObject.SetDisplayNumber(44);
 					gameMode = new WwwMode();
-					  Timer1.initialize(1000000);        
-				      Timer1.attachInterrupt(TimerInterrupt);
-					  Serial.write("WwwMode!");
+					Timer1.initialize(1000000);        
+					Timer1.attachInterrupt(TimerInterrupt);
+					Serial.write("WwwMode!");
 
 				}
 			}
@@ -74,7 +77,6 @@ void setup()
 	SystemMethodsObject.PlaySound(1000,1000);
 
 	attachInterrupt(0,AdminInterrupt,RISING);
-	attachInterrupt(1,UserInterrupt,RISING);
 }
 
 void loop()
@@ -96,7 +98,7 @@ void AdminInterrupt()
 			gameMode ->AdminButtonPush(Constants.adminSet);
 		}
 	}
-	 interrupts();
+	interrupts();
 }
 
 void UserInterrupt()
@@ -134,11 +136,11 @@ void UserInterrupt()
 			}
 		}
 	}
-	 interrupts();
+	interrupts();
 }
 
 
 void TimerInterrupt()
 {
-   gameMode ->PlayerButtonPush(Constants.player5);
+	gameMode ->PlayerButtonPush(Constants.player5);
 }
