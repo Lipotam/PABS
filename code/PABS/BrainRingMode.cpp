@@ -20,7 +20,7 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 		state[playerNumber] = 1;
 		SystemMethodsObject.SetUserLed(playerNumber);
 		SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-		SystemMethodsObject.SetDisplayNumber(11 + playerNumber);
+		SystemMethodsObject.SetDisplayNumber(playerNumber, true);
 	}
 	else
 	{
@@ -98,7 +98,6 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		////SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		SystemMethodsObject.SetDisplayNumber(-1);
 		SystemMethodsObject.SetUserLed(-1);
 	}
