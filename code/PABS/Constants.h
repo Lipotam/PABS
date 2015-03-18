@@ -26,7 +26,6 @@ public:
 	int ledShiftRegisterClk;
 	int ledShiftRegisterData;
 	int ledShiftRegisterRefresh;
-	//int ledPin;
 	int displayShiftRegisterClk;
 	int displayShiftRegisterData;
 	int displayShiftRegisterRefresh;
@@ -46,12 +45,11 @@ public:
 	int brainFaultStartFrequency;
 	int adminSet;
 	int adminReset;
-	uint8_t digit[11];
+	uint8_t digit[12];
 	uint8_t led[6];
 	int analogSeparator;
 
 
-	void init();
 	ConstantsClass();
 	~ConstantsClass();
 };

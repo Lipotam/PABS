@@ -13,7 +13,7 @@ class SystemMethods
 {
 
  public:
-	 void SetDisplayNumber(int number);
+	 void SetDisplayNumber(int number, bool faultStart = false);
 	 void SetUserLed(int number);
 	 void PlaySound(int frequency, int milliseconds);
 	void init();

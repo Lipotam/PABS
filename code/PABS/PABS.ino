@@ -75,7 +75,7 @@ void setup()
 	Serial.print(lowModeValue);
 	Serial.print(Constants.analogSeparator);
 
-	brainFaultStartFrequency	Serial.write("setDisplay");
+	Serial.write("setDisplay");
 	
 
 	Serial.write("setLeds");

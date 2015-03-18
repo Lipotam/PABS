@@ -11,7 +11,7 @@ void SystemMethods::init()
 }
 
 
-void SystemMethods::SetDisplayNumber(int number)
+void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 {
 	digitalWrite(Constants.displayShiftRegisterRefresh, LOW);
 
@@ -24,10 +24,19 @@ void SystemMethods::SetDisplayNumber(int number)
 	else
 	{
 		int lowDigit = number % 10;
-		int highByte= (number / 10) %10;
-		if (highByte == 0)
+		int highByte = 0;
+
+		if(faultStart)
 		{
-			highByte = 10;
+			highByte = 11;
+		}
+		else
+		{
+			highByte= (number / 10) %10;
+			if (highByte == 0)
+			{
+				highByte = 10;
+			}
 		}
 
 		shiftOut(Constants.displayShiftRegisterData, Constants.displayShiftRegisterClk, LSBFIRST, Constants.digit[lowDigit]);
@@ -51,10 +60,10 @@ void SystemMethods::SetUserLed(int number)
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[number]);
 		Serial.print(Constants.led[number]);
 	}
-	
+
 	Serial.write("setLeds");
 
-    digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
+	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
 }
 
 void SystemMethods::PlaySound(int frequency, int milliseconds)

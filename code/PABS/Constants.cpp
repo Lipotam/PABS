@@ -4,7 +4,7 @@
 
 #include "Constants.h"
 
-void ConstantsClass::init()
+ConstantsClass::ConstantsClass()
 {
 	adminStartButton = 19;
 	adminResetButton = 13;
@@ -19,7 +19,6 @@ void ConstantsClass::init()
 	ledShiftRegisterClk = 14;
 	ledShiftRegisterData = 15;
 	ledShiftRegisterRefresh = 16;
-	//ledPin = 13;
 	displayShiftRegisterClk = 10;
 	displayShiftRegisterData = 11;
 	displayShiftRegisterRefresh = 12;
@@ -32,7 +31,7 @@ void ConstantsClass::init()
 	player4 = 3;
 	player5 = 4;
 
-	signalPeriod = 1000;
+	signalPeriod = 600;
 	playerSignalPeriodFrequency = 1000;
 	brainFaultStartFrequency = 500;
 	adminSignalPeriodFrequency = 2000;
@@ -52,6 +51,7 @@ void ConstantsClass::init()
 	digit[8] =  0b00000000;
 	digit[9] =  0b00000100;
 	digit[10] = 0b01111111;
+	digit[11] = 0b01000011;
 
 	led[0] = 0b01000000;
 	led[1] = 0b00100000;
@@ -61,11 +61,6 @@ void ConstantsClass::init()
 	led[5] = 0b00000000;
 
     analogSeparator = 600;
-}
-
-ConstantsClass::ConstantsClass()
-{
-	init();
 }
 
 ConstantsClass::~ConstantsClass()
