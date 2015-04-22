@@ -30,10 +30,27 @@ void setup()
 	pinMode(Constants.gameStateHighBit, INPUT);
 	pinMode(Constants.gameStateLowBit, INPUT);
 
-	int highModeValue = analogRead(Constants.gameStateHighBit);
-	int lowModeValue = analogRead(Constants.gameStateLowBit);
 
-	if(highModeValue < Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
+	SystemMethodsObject.PlaySound(1000, 1000);
+
+	int state = 0;
+	while (digitalRead(Constants.adminStartButton) != HIGH)
+	{
+		SystemMethodsObject.SetDisplayNumber(state);
+		if (digitalRead(Constants.adminResetButton) == HIGH)
+		{
+			state++;
+			if (state > 3)
+			{
+				state = 0;
+			}
+			delay(200);
+		}
+	}
+
+	delay(1000);
+
+	if(state == 0)
 	{
 		SystemMethodsObject.SetDisplayNumber(11);
 		gameMode = new TestMode();
@@ -42,7 +59,7 @@ void setup()
 	}
 	else
 	{
-		if(highModeValue < Constants.analogSeparator && lowModeValue > Constants.analogSeparator)
+		if(state ==1)
 		{
 			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new BrainRingMode();
@@ -51,7 +68,7 @@ void setup()
 		}
 		else
 		{
-			if(highModeValue > Constants.analogSeparator && lowModeValue < Constants.analogSeparator)
+			if(state == 2)
 			{
 				SystemMethodsObject.SetDisplayNumber(33);
 				gameMode = new OwnGameMode();
@@ -60,22 +77,20 @@ void setup()
 			}
 			else
 			{
-				if(highModeValue > Constants.analogSeparator && lowModeValue > Constants.analogSeparator)
+				if(state == 3)
 				{
 					SystemMethodsObject.SetDisplayNumber(44);
 					gameMode = new WwwMode();
 					Timer1.initialize(1000000);        
 					Timer1.attachInterrupt(TimerInterrupt);
 					Serial.write("WwwMode!");
-
 				}
 			}
 		}
 	}
 
 	SystemMethodsObject.SetUserLed(-1);
-	SystemMethodsObject.PlaySound(1000,1000);
-
+	SystemMethodsObject.PlaySound(2000, 1000);
 	attachInterrupt(0,AdminInterrupt,RISING);
 }
 
