@@ -73,7 +73,6 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 		SystemMethodsObject.SetUserLed(-1);
 		SystemMethodsObject.SetDisplayNumber(-1);
 	}
