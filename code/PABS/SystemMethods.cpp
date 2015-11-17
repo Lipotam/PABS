@@ -68,5 +68,17 @@ void SystemMethods::PlaySound(int frequency, int milliseconds)
 	tone(Constants.speakerPin, frequency, milliseconds); 
 }
 
+void SystemMethods::PlayTimeoutSound()
+{
+	PlaySound(1000, 300);
+	delay(100);
+	PlaySound(2000, 300);
+	delay(100);
+	PlaySound(3000, 300);
+	delay(100);
+}
+
+
+
 SystemMethods SystemMethodsObject;
 

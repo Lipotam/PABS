@@ -49,6 +49,8 @@ public:
 	uint8_t led[6];
 	int analogSeparator;
 
+	int ownGameMainTimer;
+	int ownGameSecondaryTimer;
 
 	ConstantsClass();
 	~ConstantsClass();

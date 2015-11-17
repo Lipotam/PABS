@@ -12,7 +12,6 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define _VMDEBUG 1
 #define ARDUINO 160
 #define ARDUINO_MAIN
 #define __AVR__
@@ -83,12 +82,16 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <PABS.ino>
 #include <BrainRingMode.cpp>
 #include <BrainRingMode.h>
+#include <BrainRingWithTimerMode.cpp>
+#include <BrainRingWithTimerMode.h>
 #include <Constants.cpp>
 #include <Constants.h>
 #include <GameModeBase.cpp>
 #include <GameModeBase.h>
 #include <OwnGameMode.cpp>
 #include <OwnGameMode.h>
+#include <OwnGameWithTimerMode.cpp>
+#include <OwnGameWithTimerMode.h>
 #include <SystemMethods.cpp>
 #include <SystemMethods.h>
 #include <TestMode.cpp>

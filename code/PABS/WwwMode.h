@@ -21,6 +21,7 @@ private:
 	  ~WwwMode();
 	 void PlayerButtonPush(int playerNumber);
 	 void AdminButtonPush(int buttonNumber);
+	 void TimerPush();
 };
 
 

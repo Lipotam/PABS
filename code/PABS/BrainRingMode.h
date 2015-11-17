@@ -25,6 +25,7 @@ private:
 
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
+	 virtual void TimerPush();
 };
 
 

@@ -113,6 +113,8 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 	}
 }
 
+void BrainRingMode::TimerPush(){};
+
 void BrainRingMode::ResetState()
 {
 	SystemMethodsObject.SetUserLed(-1);

@@ -61,6 +61,9 @@ ConstantsClass::ConstantsClass()
 	led[5] = 0b00000000;
 
     analogSeparator = 600;
+
+	ownGameMainTimer= 30;
+	ownGameSecondaryTimer = 10;
 }
 
 ConstantsClass::~ConstantsClass()

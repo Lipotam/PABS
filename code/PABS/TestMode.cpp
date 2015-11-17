@@ -21,3 +21,5 @@ void TestMode::AdminButtonPush(int buttonNumber)
 	SystemMethodsObject.SetUserLed(buttonNumber);
 	SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency * (5+buttonNumber),Constants.signalPeriod);
 }
+
+void TestMode::TimerPush(){};

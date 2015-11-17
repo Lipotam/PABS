@@ -3,6 +3,7 @@
 #include "WwwMode.h"
 #include "OwnGameMode.h"
 #include "BrainRingMode.h"
+#include "BrainRingWithTimerMode.h"
 #include "GameModeBase.h"
 #include "Constants.h"
 #include "TimerOne.h"  
@@ -40,7 +41,7 @@ void setup()
 		if (digitalRead(Constants.adminResetButton) == HIGH)
 		{
 			state++;
-			if (state > 3)
+			if (state > 4)
 			{
 				state = 0;
 			}
@@ -84,6 +85,18 @@ void setup()
 					Timer1.initialize(1000000);        
 					Timer1.attachInterrupt(TimerInterrupt);
 					Serial.write("WwwMode!");
+				}
+				else
+				{
+					if (state == 4)
+					{
+						SystemMethodsObject.SetDisplayNumber(55);
+						gameMode = new BrainRingWithTimerMode();
+						Timer1.initialize(1000000);
+						Timer1.attachInterrupt(TimerInterrupt);
+						Serial.write("Brain with Timer!");
+						attachInterrupt(1, UserInterrupt, RISING);
+					}
 				}
 			}
 		}
@@ -157,5 +170,5 @@ void UserInterrupt()
 
 void TimerInterrupt()
 {
-	gameMode ->PlayerButtonPush(Constants.player5);
+	gameMode->TimerPush();
 }

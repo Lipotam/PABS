@@ -18,6 +18,7 @@ class TestMode: public GameModeBase
 	   ~TestMode();
 	 void PlayerButtonPush(int playerNumber);
 	 void AdminButtonPush(int buttonNumber);
+	 virtual void TimerPush();
 };
 
 

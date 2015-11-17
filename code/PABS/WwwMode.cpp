@@ -15,22 +15,7 @@ WwwMode::~WwwMode(){}
 
 void WwwMode::PlayerButtonPush(int playerNumber)
 {
-	if (state == 1)
-	{
-		SystemMethodsObject.SetDisplayNumber(timeLeft);
-		timeLeft--;
-
-		if (timeLeft == 9)
-		{
-			SystemMethodsObject.PlaySound(Constants.wwwTenSecondsLeftFrequency, Constants.signalPeriod);
-		}
-
-		if (timeLeft == 0)
-		{
-			SystemMethodsObject.PlaySound(Constants.wwwPeriodExpiredFrequency, Constants.signalPeriod);
-			state = 0;
-		}
-	}
+	
 }
 
 void WwwMode::AdminButtonPush(int buttonNumber)
@@ -52,3 +37,22 @@ void WwwMode::AdminButtonPush(int buttonNumber)
 		}
 	}
 }
+
+void WwwMode::TimerPush(){
+	if (state == 1)
+	{
+		SystemMethodsObject.SetDisplayNumber(timeLeft);
+		timeLeft--;
+
+		if (timeLeft == 9)
+		{
+			SystemMethodsObject.PlaySound(Constants.wwwTenSecondsLeftFrequency, Constants.signalPeriod);
+		}
+
+		if (timeLeft == 0)
+		{
+			SystemMethodsObject.PlaySound(Constants.wwwPeriodExpiredFrequency, Constants.signalPeriod);
+			state = 0;
+		}
+	}
+};

@@ -88,6 +88,7 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	}
 }
 
+void OwnGameMode::TimerPush(){};
 void OwnGameMode::ResetState()
 {
 	SystemMethodsObject.SetUserLed(-1);
