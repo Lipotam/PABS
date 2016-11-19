@@ -40,18 +40,18 @@ ConstantsClass::ConstantsClass()
 	adminSet = 0;
 	adminReset = 1;
 	
-	digit[0] =  0b00001000;
-	digit[1] =  0b00111110;
-	digit[2] =  0b00010001;
-	digit[3] =  0b00010100;
-	digit[4] =  0b00100110;
-	digit[5] =  0b01000100;
-	digit[6] =  0b01000000;
-	digit[7] =  0b00011110;
-	digit[8] =  0b00000000;
-	digit[9] =  0b00000100;
-	digit[10] = 0b01111111;
-	digit[11] = 0b01000011;
+	digit[0] =  0b00000011;
+	digit[1] =  0b10011111;
+	digit[2] =  0b00100101;
+	digit[3] =  0b00001101;
+	digit[4] =  0b10011001;
+	digit[5] =  0b01001001;
+	digit[6] =  0b01000001;
+	digit[7] =  0b00011111;
+	digit[8] =  0b00000001;
+	digit[9] =  0b00001001;
+	digit[10] = 0b11111111;
+	digit[11] = 0b01110001;
 
 	led[0] = 0b01000000;
 	led[1] = 0b00100000;
@@ -59,6 +59,8 @@ ConstantsClass::ConstantsClass()
 	led[3] = 0b00001000;
 	led[4] = 0b00000100;
 	led[5] = 0b00000000;
+
+
 
     analogSeparator = 600;
 
