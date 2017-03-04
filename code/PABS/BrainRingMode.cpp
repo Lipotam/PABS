@@ -74,17 +74,6 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 								status = 2;
 								SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
 							}
-							else
-							{
-								if (state[Constants.player5] == 0 && digitalRead(Constants.fifthPlayerButton) == HIGH)
-								{
-									state[Constants.player5] = 1;
-									SystemMethodsObject.SetUserLed(Constants.player5);
-									SystemMethodsObject.SetDisplayNumber(Constants.player5+1);
-									status = 2;
-									SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-								}
-							}
 						}
 					}
 				}

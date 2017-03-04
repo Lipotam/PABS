@@ -54,13 +54,6 @@ void OwnGameMode::PlayerButtonPush(int playerNumber)
 						{
 							SetPlayerClick(Constants.player4);
 						}
-						else
-						{
-							if (state[Constants.player5] == 0 && digitalRead(Constants.fifthPlayerButton) == HIGH)
-							{
-								SetPlayerClick(Constants.player5);
-							}
-						}
 					}
 				}
 			}

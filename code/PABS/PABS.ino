@@ -1,9 +1,12 @@
+#include <PinChangeInterruptSettings.h>
+#include <PinChangeInterruptPins.h>
+#include <PinChangeInterruptBoards.h>
+#include <PinChangeInterrupt.h>
 #include "SystemMethods.h"
 #include "TestMode.h"
 #include "WwwMode.h"
 #include "OwnGameMode.h"
 #include "BrainRingMode.h"
-#include "BrainRingWithTimerMode.h"
 #include "GameModeBase.h"
 #include "Constants.h"
 #include "TimerOne.h"  
@@ -14,13 +17,10 @@ void setup()
 	Serial.begin(9600);
 	pinMode(Constants.adminStartButton, INPUT);
 	pinMode(Constants.adminResetButton, INPUT);
-	pinMode(Constants.adminInterrupt, INPUT);
-	pinMode(Constants.playerInerrupt, INPUT);
 	pinMode(Constants.firstPlayerButton, INPUT);
 	pinMode(Constants.secondPlayerButton, INPUT);
 	pinMode(Constants.thirdPlayerButton, INPUT);
 	pinMode(Constants.fourthPlayerButton, INPUT);
-	pinMode(Constants.fifthPlayerButton, INPUT);
 	pinMode(Constants.speakerPin, INPUT);
 	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
 	pinMode(Constants.ledShiftRegisterData, OUTPUT);
@@ -41,7 +41,7 @@ void setup()
 		if (digitalRead(Constants.adminResetButton) == HIGH)
 		{
 			state++;
-			if (state > 4)
+			if (state > 3)
 			{
 				state = 0;
 			}
@@ -51,52 +51,40 @@ void setup()
 
 	delay(1000);
 
-	if(state == 0)
+	if (state == 0)
 	{
 		SystemMethodsObject.SetDisplayNumber(11);
 		gameMode = new TestMode();
 		Serial.write("TestMode");
-		attachInterrupt(1,UserInterrupt,RISING);
+		SetupPlayerInts();
 	}
 	else
 	{
-		if(state ==1)
+		if (state == 1)
 		{
 			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new BrainRingMode();
 			Serial.write("BrainMode");
-			attachInterrupt(1,UserInterrupt,RISING);
+			SetupPlayerInts();
 		}
 		else
 		{
-			if(state == 2)
+			if (state == 2)
 			{
 				SystemMethodsObject.SetDisplayNumber(33);
 				gameMode = new OwnGameMode();
 				Serial.write("OwnGameMode");
-				attachInterrupt(1,UserInterrupt,RISING);
+				SetupPlayerInts();
 			}
 			else
 			{
-				if(state == 3)
+				if (state == 3)
 				{
 					SystemMethodsObject.SetDisplayNumber(44);
 					gameMode = new WwwMode();
-					Timer1.initialize(1000000);        
+					Timer1.initialize(1000000);
 					Timer1.attachInterrupt(TimerInterrupt);
 					Serial.write("WwwMode!");
-				}
-				else
-				{
-					if (state == 4)
-					{
-						SystemMethodsObject.SetDisplayNumber(55);
-						gameMode = new BrainRingWithTimerMode();
-						Timer1.initialize(1000000);
-						Timer1.attachInterrupt(TimerInterrupt);
-						Serial.write("Brain with Timer!");
-						attachInterrupt(1, UserInterrupt, RISING);
-					}
 				}
 			}
 		}
@@ -104,69 +92,68 @@ void setup()
 
 	SystemMethodsObject.SetUserLed(-1);
 	SystemMethodsObject.PlaySound(2000, 1000);
-	attachInterrupt(0,AdminInterrupt,RISING);
+	SetupAdminInts();
 }
 
 void loop()
 {
 }
 
+void SetupAdminInts()
+{
+	attachPCINT(digitalPinToPCINT(Constants.adminResetButton), AdminResetPush, RISING);
+	attachPCINT(digitalPinToPCINT(Constants.adminStartButton), AdminStartPush, RISING);
+}
 
-void AdminInterrupt()
+void SetupPlayerInts()
+{
+	attachPCINT(digitalPinToPCINT(Constants.firstPlayerButton), Player1Push, RISING);
+	attachPCINT(digitalPinToPCINT(Constants.secondPlayerButton), Player2Push, RISING);
+	attachPCINT(digitalPinToPCINT(Constants.thirdPlayerButton), Player3Push, RISING);
+	attachPCINT(digitalPinToPCINT(Constants.fourthPlayerButton), Player4Push, RISING);
+}
+
+void AdminStartPush()
 {
 	noInterrupts();
-	if(digitalRead(Constants.adminResetButton) == HIGH )
-	{
-		gameMode ->AdminButtonPush(Constants.adminReset);
-	}
-	else
-	{
-		if(digitalRead(Constants.adminStartButton) == HIGH )
-		{
-			gameMode ->AdminButtonPush(Constants.adminSet);
-		}
-	}
+	gameMode->AdminButtonPush(Constants.adminSet);
 	interrupts();
 }
 
-void UserInterrupt()
+void AdminResetPush()
 {
 	noInterrupts();
-	if (digitalRead(Constants.firstPlayerButton) == HIGH)
-	{
-		gameMode ->PlayerButtonPush(Constants.player1);
-	}
-	else
-	{
-		if (digitalRead(Constants.secondPlayerButton) == HIGH)
-		{
-			gameMode ->PlayerButtonPush(Constants.player2);
-		}
-		else
-		{
-			if (digitalRead(Constants.thirdPlayerButton) == HIGH)
-			{
-				gameMode ->PlayerButtonPush(Constants.player3);
-			}
-			else
-			{
-				if (digitalRead(Constants.fourthPlayerButton) == HIGH)
-				{
-					gameMode ->PlayerButtonPush(Constants.player4);
-				}
-				else
-				{
-					if (digitalRead(Constants.fifthPlayerButton) == HIGH)
-					{
-						gameMode ->PlayerButtonPush(Constants.player5);
-					}
-				}
-			}
-		}
-	}
+	gameMode->AdminButtonPush(Constants.adminReset);
 	interrupts();
 }
 
+void Player1Push()
+{
+	noInterrupts();
+	gameMode->PlayerButtonPush(Constants.player1);
+	interrupts();
+}
+
+void Player2Push()
+{
+	noInterrupts();
+	gameMode->PlayerButtonPush(Constants.player1);
+	interrupts();
+}
+
+void Player3Push()
+{
+	noInterrupts();
+	gameMode->PlayerButtonPush(Constants.player1);
+	interrupts();
+}
+
+void Player4Push()
+{
+	noInterrupts();
+	gameMode->PlayerButtonPush(Constants.player1);
+	interrupts();
+}
 
 void TimerInterrupt()
 {

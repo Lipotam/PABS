@@ -6,15 +6,12 @@
 
 ConstantsClass::ConstantsClass()
 {
-	adminStartButton = 19;
-	adminResetButton = 13;
-	adminInterrupt = 2;
-	playerInerrupt = 3;
-	firstPlayerButton = 8;
-	secondPlayerButton = 7;
-	thirdPlayerButton = 4;
-	fourthPlayerButton = 6;
-	fifthPlayerButton = 5;
+	adminStartButton = 2;
+	adminResetButton = 3;
+	firstPlayerButton = 4;
+	secondPlayerButton = 5;
+	thirdPlayerButton = 6;
+	fourthPlayerButton = 7;
 	speakerPin = 9;
 	ledShiftRegisterClk = 14;
 	ledShiftRegisterData = 15;
@@ -29,7 +26,6 @@ ConstantsClass::ConstantsClass()
 	player2 = 1;
 	player3 = 2;
 	player4 = 3;
-	player5 = 4;
 
 	signalPeriod = 600;
 	playerSignalPeriodFrequency = 1000;

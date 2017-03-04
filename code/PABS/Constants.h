@@ -15,13 +15,10 @@ public:
 
 	int  adminStartButton;
 	int adminResetButton;
-	int adminInterrupt;
-	int playerInerrupt;
 	int firstPlayerButton;
 	int secondPlayerButton;
 	int thirdPlayerButton;
 	int fourthPlayerButton;
-	int fifthPlayerButton;
 	int speakerPin;
 	int ledShiftRegisterClk;
 	int ledShiftRegisterData;
@@ -35,7 +32,6 @@ public:
 	int player2;
 	int player3;
 	int player4;
-	int player5;
 
 	int signalPeriod;
 	int playerSignalPeriodFrequency;

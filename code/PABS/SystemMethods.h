@@ -16,7 +16,6 @@ class SystemMethods
 	 void SetDisplayNumber(int number, bool faultStart = false);
 	 void SetUserLed(int number);
 	 void PlaySound(int frequency, int milliseconds);
-	 void PlayTimeoutSound();
 	void init();
 };
 
