@@ -19,8 +19,6 @@ ConstantsClass::ConstantsClass()
 	displayShiftRegisterClk = 10;
 	displayShiftRegisterData = 11;
 	displayShiftRegisterRefresh = 12;
-	gameStateHighBit = 17;
-	gameStateLowBit = 18;
 
 	player1 = 0;
 	player2 = 1;
@@ -49,16 +47,12 @@ ConstantsClass::ConstantsClass()
 	digit[10] = 0b11111111;
 	digit[11] = 0b01110001;
 
-	led[0] = 0b01000000;
+	led[0] = 0b10000000;
 	led[1] = 0b00100000;
-	led[2] = 0b00010000;
-	led[3] = 0b00001000;
-	led[4] = 0b00000100;
+	led[2] = 0b00001000;
+	led[3] = 0b00000010;
+	led[4] = 0b00000000;
 	led[5] = 0b00000000;
-
-
-
-    analogSeparator = 600;
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;

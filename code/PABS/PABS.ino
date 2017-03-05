@@ -1,7 +1,4 @@
-#include <PinChangeInterruptSettings.h>
-#include <PinChangeInterruptPins.h>
-#include <PinChangeInterruptBoards.h>
-#include <PinChangeInterrupt.h>
+#include <EnableInterrupt.h>
 #include "SystemMethods.h"
 #include "TestMode.h"
 #include "WwwMode.h"
@@ -15,12 +12,12 @@ GameModeBase* gameMode;
 void setup()
 {
 	Serial.begin(9600);
-	pinMode(Constants.adminStartButton, INPUT);
-	pinMode(Constants.adminResetButton, INPUT);
-	pinMode(Constants.firstPlayerButton, INPUT);
-	pinMode(Constants.secondPlayerButton, INPUT);
-	pinMode(Constants.thirdPlayerButton, INPUT);
-	pinMode(Constants.fourthPlayerButton, INPUT);
+	pinMode(Constants.adminStartButton, INPUT_PULLUP);
+	pinMode(Constants.adminResetButton, INPUT_PULLUP);
+	pinMode(Constants.firstPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.secondPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.thirdPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.fourthPlayerButton, INPUT_PULLUP);
 	pinMode(Constants.speakerPin, INPUT);
 	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
 	pinMode(Constants.ledShiftRegisterData, OUTPUT);
@@ -28,17 +25,16 @@ void setup()
 	pinMode(Constants.displayShiftRegisterClk, OUTPUT);
 	pinMode(Constants.displayShiftRegisterData, OUTPUT);
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
-	pinMode(Constants.gameStateHighBit, INPUT);
-	pinMode(Constants.gameStateLowBit, INPUT);
 
 
 	SystemMethodsObject.PlaySound(1000, 1000);
+	Serial.write("Started!");
 
 	int state = 0;
-	while (digitalRead(Constants.adminStartButton) != HIGH)
+	while (digitalRead(Constants.adminStartButton) == HIGH)
 	{
 		SystemMethodsObject.SetDisplayNumber(state);
-		if (digitalRead(Constants.adminResetButton) == HIGH)
+		if (digitalRead(Constants.adminResetButton) != HIGH)
 		{
 			state++;
 			if (state > 3)
@@ -95,41 +91,54 @@ void setup()
 	SetupAdminInts();
 }
 
+int ledvar = 1;
+
 void loop()
 {
 }
 
 void SetupAdminInts()
 {
-	attachPCINT(digitalPinToPCINT(Constants.adminResetButton), AdminResetPush, RISING);
-	attachPCINT(digitalPinToPCINT(Constants.adminStartButton), AdminStartPush, RISING);
+	enableInterrupt(Constants.adminResetButton, AdminResetPush, RISING);
+	enableInterrupt(Constants.adminStartButton , AdminStartPush, RISING);
 }
 
 void SetupPlayerInts()
 {
-	attachPCINT(digitalPinToPCINT(Constants.firstPlayerButton), Player1Push, RISING);
-	attachPCINT(digitalPinToPCINT(Constants.secondPlayerButton), Player2Push, RISING);
-	attachPCINT(digitalPinToPCINT(Constants.thirdPlayerButton), Player3Push, RISING);
-	attachPCINT(digitalPinToPCINT(Constants.fourthPlayerButton), Player4Push, RISING);
+	enableInterrupt(Constants.firstPlayerButton, Player1Push, RISING);
+	enableInterrupt(Constants.secondPlayerButton, Player2Push, RISING);
+	enableInterrupt(Constants.thirdPlayerButton, Player3Push, RISING);
+	enableInterrupt(Constants.fourthPlayerButton, Player4Push, RISING);
 }
 
 void AdminStartPush()
 {
 	noInterrupts();
+	byte piind = PIND;
+	//if (!(piind & bit(Constants.adminStartButton))){
+	Serial.print(piind);
+	Serial.println("Admin start pressed!");
 	gameMode->AdminButtonPush(Constants.adminSet);
+	//}
 	interrupts();
 }
 
 void AdminResetPush()
 {
 	noInterrupts();
-	gameMode->AdminButtonPush(Constants.adminReset);
+	byte piind = PIND;
+	//if (!(piind & bit(Constants.adminResetButton))) {
+		Serial.print(piind);
+		Serial.println("Admin reset pressed!");
+		gameMode->AdminButtonPush(Constants.adminReset);
+	//}
 	interrupts();
 }
 
 void Player1Push()
 {
 	noInterrupts();
+	Serial.write("Player 1 pressed!");
 	gameMode->PlayerButtonPush(Constants.player1);
 	interrupts();
 }
@@ -137,21 +146,24 @@ void Player1Push()
 void Player2Push()
 {
 	noInterrupts();
-	gameMode->PlayerButtonPush(Constants.player1);
+	Serial.write("Player 2 pressed!");
+	gameMode->PlayerButtonPush(Constants.player2);
 	interrupts();
 }
 
 void Player3Push()
 {
 	noInterrupts();
-	gameMode->PlayerButtonPush(Constants.player1);
+	Serial.write("Player 3 pressed!");
+	gameMode->PlayerButtonPush(Constants.player3);
 	interrupts();
 }
 
 void Player4Push()
 {
 	noInterrupts();
-	gameMode->PlayerButtonPush(Constants.player1);
+	Serial.write("Player 4 pressed!");
+	gameMode->PlayerButtonPush(Constants.player4);
 	interrupts();
 }
 

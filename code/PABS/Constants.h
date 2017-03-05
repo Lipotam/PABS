@@ -26,8 +26,6 @@ public:
 	int displayShiftRegisterClk;
 	int displayShiftRegisterData;
 	int displayShiftRegisterRefresh;
-	int gameStateHighBit;
-	int gameStateLowBit;
 	int player1;
 	int player2;
 	int player3;
@@ -43,7 +41,6 @@ public:
 	int adminReset;
 	uint8_t digit[12];
 	uint8_t led[6];
-	int analogSeparator;
 
 	int ownGameMainTimer;
 	int ownGameSecondaryTimer;
