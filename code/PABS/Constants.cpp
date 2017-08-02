@@ -13,12 +13,14 @@ ConstantsClass::ConstantsClass()
 	thirdPlayerButton = 6;
 	fourthPlayerButton = 7;
 	speakerPin = 9;
-	ledShiftRegisterClk = 14;
-	ledShiftRegisterData = 15;
-	ledShiftRegisterRefresh = 16;
+
+	ledShiftRegisterClk = 17; // A0
+	ledShiftRegisterData = 16; // A2
+	ledShiftRegisterRefresh = 15; //A1
+	
 	displayShiftRegisterClk = 10;
-	displayShiftRegisterData = 11;
-	displayShiftRegisterRefresh = 12;
+	displayShiftRegisterData = 8;
+	displayShiftRegisterRefresh = 11; // change with 8
 
 	player1 = 0;
 	player2 = 1;
@@ -47,12 +49,19 @@ ConstantsClass::ConstantsClass()
 	digit[10] = 0b11111111;
 	digit[11] = 0b01110001;
 
-	led[0] = 0b10000000;
-	led[1] = 0b00100000;
-	led[2] = 0b00001000;
-	led[3] = 0b00000010;
+	led[0] = 0b01000000;
+	led[1] = 0b00010000;
+	led[2] = 0b00000100;
+	led[3] = 0b00000001;
 	led[4] = 0b00000000;
 	led[5] = 0b00000000;
+
+	//led[0] = 0b00000000;
+	//led[1] = 0b11111111;
+	//led[2] = 0b00000000;
+	//led[3] = 0b11111111;
+	//led[4] = 0b00000000;
+	//led[5] = 0b00000000;
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;

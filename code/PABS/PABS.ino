@@ -9,6 +9,7 @@
 #include "TimerOne.h"  
 
 GameModeBase* gameMode;
+
 void setup()
 {
 	Serial.begin(9600);
@@ -26,11 +27,10 @@ void setup()
 	pinMode(Constants.displayShiftRegisterData, OUTPUT);
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
 
-
 	SystemMethodsObject.PlaySound(1000, 1000);
 	Serial.write("Started!");
 
-	int state = 0;
+	/*int state = 0;
 	while (digitalRead(Constants.adminStartButton) == HIGH)
 	{
 		SystemMethodsObject.SetDisplayNumber(state);
@@ -88,19 +88,34 @@ void setup()
 
 	SystemMethodsObject.SetUserLed(-1);
 	SystemMethodsObject.PlaySound(2000, 1000);
-	SetupAdminInts();
+	SetupAdminInts();*/
 }
-
-int ledvar = 1;
 
 void loop()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		SystemMethodsObject.SetUserLed(i);
+		//SystemMethodsObject.SetDisplayNumber(i);
+		delay(1000);
+	}
+	
+
+	digitalWrite(Constants.displayShiftRegisterRefresh, HIGH);
+	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
+	digitalWrite(Constants.displayShiftRegisterData, HIGH);
+	
+
+	/*digitalWrite(Constants.ledShiftRegisterClk, HIGH);
+	digitalWrite(Constants.ledShiftRegisterData, HIGH);
+	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
+	digitalWrite(17, HIGH);*/
 }
 
 void SetupAdminInts()
 {
 	enableInterrupt(Constants.adminResetButton, AdminResetPush, RISING);
-	enableInterrupt(Constants.adminStartButton , AdminStartPush, RISING);
+	enableInterrupt(Constants.adminStartButton, AdminStartPush, RISING);
 }
 
 void SetupPlayerInts()
@@ -115,11 +130,9 @@ void AdminStartPush()
 {
 	noInterrupts();
 	byte piind = PIND;
-	//if (!(piind & bit(Constants.adminStartButton))){
 	Serial.print(piind);
 	Serial.println("Admin start pressed!");
 	gameMode->AdminButtonPush(Constants.adminSet);
-	//}
 	interrupts();
 }
 
@@ -127,11 +140,9 @@ void AdminResetPush()
 {
 	noInterrupts();
 	byte piind = PIND;
-	//if (!(piind & bit(Constants.adminResetButton))) {
-		Serial.print(piind);
-		Serial.println("Admin reset pressed!");
-		gameMode->AdminButtonPush(Constants.adminReset);
-	//}
+	Serial.print(piind);
+	Serial.println("Admin reset pressed!");
+	gameMode->AdminButtonPush(Constants.adminReset);
 	interrupts();
 }
 
