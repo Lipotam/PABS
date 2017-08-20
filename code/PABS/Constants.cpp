@@ -27,7 +27,7 @@ ConstantsClass::ConstantsClass()
 
 	signalPeriod = 600;
 	playerSignalPeriodFrequency = 1000;
-	brainFaultStartFrequency = 500;
+	brainFaultStartFrequency = 900;
 	adminSignalPeriodFrequency = 2000;
 	wwwTenSecondsLeftFrequency = 2000;
 	wwwPeriodExpiredFrequency = 3000;
@@ -56,6 +56,9 @@ ConstantsClass::ConstantsClass()
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;
+
+	brainRingMainTimer = 30;
+	brainRingSecondaryTimer = 10;
 }
 
 ConstantsClass::~ConstantsClass()
