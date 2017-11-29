@@ -45,6 +45,9 @@ public:
 	int ownGameMainTimer;
 	int ownGameSecondaryTimer;
 
+	int brainRingMainTimer;
+	int brainRingSecondaryTimer;
+
 	ConstantsClass();
 	~ConstantsClass();
 };
