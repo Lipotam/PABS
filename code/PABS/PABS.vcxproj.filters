@@ -45,9 +45,6 @@
     <ClInclude Include="BrainRingWithTimerMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visual Micro\.PABS.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="__vm\.PABS.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
