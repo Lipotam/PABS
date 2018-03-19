@@ -6,26 +6,30 @@
 
 ConstantsClass::ConstantsClass()
 {
-	adminStartButton = 2;
-	adminResetButton = 3;
-	firstPlayerButton = 4;
-	secondPlayerButton = 5;
-	thirdPlayerButton = 6;
-	fourthPlayerButton = 7;
-	speakerPin = 9;
+	adminStartButton = 3;
+	adminResetButton = 2;
 
-	ledShiftRegisterClk = 17; // A0
-	ledShiftRegisterData = 16; // A2
-	ledShiftRegisterRefresh = 15; //A1
+	firstPlayerButton = 11;
+	secondPlayerButton = 10;
+	thirdPlayerButton = 9;
+	fourthPlayerButton = 8;
+	fifthPlayerButton = 7;
+
+	speakerPin = 13;
+
+	ledShiftRegisterClk = A2;
+	ledShiftRegisterData = A3;
+	ledShiftRegisterRefresh = A4;
 	
-	displayShiftRegisterClk = 10;
-	displayShiftRegisterData = 8;
-	displayShiftRegisterRefresh = 11; // change with 8
+	displayShiftRegisterClk = A6;
+	displayShiftRegisterData = A7;
+	displayShiftRegisterRefresh = A5;
 
 	player1 = 0;
 	player2 = 1;
 	player3 = 2;
 	player4 = 3;
+	player5 = 4;
 
 	signalPeriod = 600;
 	playerSignalPeriodFrequency = 1000;
@@ -49,19 +53,12 @@ ConstantsClass::ConstantsClass()
 	digit[10] = 0b11111111;
 	digit[11] = 0b01110001;
 
-	led[0] = 0b01000000;
-	led[1] = 0b00010000;
-	led[2] = 0b00000100;
-	led[3] = 0b00000001;
-	led[4] = 0b00000000;
-	led[5] = 0b00000000;
-
-	//led[0] = 0b00000000;
-	//led[1] = 0b11111111;
-	//led[2] = 0b00000000;
-	//led[3] = 0b11111111;
-	//led[4] = 0b00000000;
-	//led[5] = 0b00000000;
+	led[0] = 0b00000000;
+	led[1] = 0b00000001;
+	led[2] = 0b00000010;
+	led[3] = 0b00000100;
+	led[4] = 0b00001000;
+	led[5] = 0b00010000;
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;
