@@ -9,9 +9,9 @@
 #include "WProgram.h"
 #endif
 
-#include "GameModeBase.h"
+#include "BrainRingMode.h"
 
-class BrainRingWithTimerMode : public GameModeBase
+class BrainRingWithTimerMode : public BrainRingMode
 {
 private:
 	bool state[5];

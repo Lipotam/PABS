@@ -28,55 +28,15 @@ void BrainRingWithTimerMode::PlayerButtonPush(int playerNumber)
 		{
 			if (state[playerNumber] == 0)
 			{
-				state[playerNumber] = 1;
-				SystemMethodsObject.SetUserLed(playerNumber);
-				SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
-				status = 2;
-				SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+				SetPlayerPush(playerNumber);
 			}
 			else
 			{
-				if (state[Constants.player1] == 0 && digitalRead(Constants.firstPlayerButton) == HIGH)
-				{
-					state[Constants.player1] = 1;
-					SystemMethodsObject.SetUserLed(Constants.player1);
-					SystemMethodsObject.SetDisplayNumber(Constants.player1 + 1);
-					status = 2;
-					SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-				}
-				else
-				{
-					if (state[Constants.player2] == 0 && digitalRead(Constants.secondPlayerButton) == HIGH)
-					{
-						state[Constants.player2] = 1;
-						SystemMethodsObject.SetUserLed(Constants.player2);
-						SystemMethodsObject.SetDisplayNumber(Constants.player2 + 1);
-						status = 2;
-						SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-					}
-					else
-					{
-						if (state[Constants.player3] == 0 && digitalRead(Constants.thirdPlayerButton) == HIGH)
-						{
-							state[Constants.player3] = 1;
-							SystemMethodsObject.SetUserLed(Constants.player3);
-							SystemMethodsObject.SetDisplayNumber(Constants.player3 + 1);
-							status = 2;
-							SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-						}
-						else
-						{
-							if (state[Constants.player4] == 0 && digitalRead(Constants.fourthPlayerButton) == HIGH)
-							{
-								state[Constants.player4] = 1;
-								SystemMethodsObject.SetUserLed(Constants.player4);
-								SystemMethodsObject.SetDisplayNumber(Constants.player4 + 1);
-								status = 2;
-								SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-							}
-						}
-					}
-				}
+				if (CheckAndSetPlayerPush(Constants.player1, Constants.firstPlayerButton)) return;
+				if (CheckAndSetPlayerPush(Constants.player2, Constants.secondPlayerButton)) return;
+				if (CheckAndSetPlayerPush(Constants.player3, Constants.thirdPlayerButton)) return;
+				if (CheckAndSetPlayerPush(Constants.player4, Constants.fourthPlayerButton)) return;
+				if (CheckAndSetPlayerPush(Constants.player5, Constants.fifthPlayerButton)) return;
 			}
 		}
 	}
@@ -123,13 +83,6 @@ void BrainRingWithTimerMode::TimerPush() {
 
 void BrainRingWithTimerMode::ResetState()
 {
-	SystemMethodsObject.SetUserLed(-1);
-	status = 0;
-	state[0] = 0;
-	state[1] = 0;
-	state[2] = 0;
-	state[3] = 0;
-	state[4] = 0;
-
+	BrainRingMode::ResetState();
 	timer = Constants.brainRingMainTimer;
 }
