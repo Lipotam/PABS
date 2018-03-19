@@ -18,6 +18,7 @@ private:
 	int status;
 
 	void ResetState();
+	
 
   public:
 	  BrainRingMode();
@@ -26,6 +27,10 @@ private:
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
 	 virtual void TimerPush();
+
+	protected:
+		bool CheckAndSetPlayerPush(int playerNumber, int playerPin);
+		void SetPlayerPush(int playerNumber);
 };
 
 
