@@ -14,12 +14,16 @@ GameModeBase* gameMode;
 void setup()
 {
 	Serial.begin(9600);
+
 	pinMode(Constants.adminStartButton, INPUT_PULLUP);
 	pinMode(Constants.adminResetButton, INPUT_PULLUP);
+
 	pinMode(Constants.firstPlayerButton, INPUT_PULLUP);
 	pinMode(Constants.secondPlayerButton, INPUT_PULLUP);
 	pinMode(Constants.thirdPlayerButton, INPUT_PULLUP);
 	pinMode(Constants.fourthPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.fifthPlayerButton, INPUT_PULLUP);
+
 	pinMode(Constants.speakerPin, OUTPUT);
 	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
 	pinMode(Constants.ledShiftRegisterData, OUTPUT);
@@ -31,7 +35,7 @@ void setup()
 	SystemMethodsObject.PlaySound(1000, 1000);
 	Serial.write("Started!");
 
-	/*int state = 0;
+	int state = 0;
 	while (digitalRead(Constants.adminStartButton) == HIGH)
 	{
 		SystemMethodsObject.SetDisplayNumber(state);
@@ -48,81 +52,51 @@ void setup()
 
 	delay(500);
 
-	if (state == 0)
+	switch (state)
 	{
-		SystemMethodsObject.SetDisplayNumber(11);
-		gameMode = new TestMode();
-		Serial.write("TestMode");
-		SetupPlayerInts();
-	}
-	else
-	{
-		if (state == 1)
-		{
+		case 0: 
+			SystemMethodsObject.SetDisplayNumber(11);
+			gameMode = new TestMode();
+			Serial.write("TestMode");
+			SetupPlayerInts();
+			break;
+		case 1: 
 			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new BrainRingMode();
 			Serial.write("BrainMode");
 			SetupPlayerInts();
-		}
-		else
-		{
-			if (state == 2)
-			{
-				SystemMethodsObject.SetDisplayNumber(33);
-				gameMode = new OwnGameMode();
-				Serial.write("OwnGameMode");
-				SetupPlayerInts();
-			}
-			else
-			{
-				if (state == 3)
-				{
-					SystemMethodsObject.SetDisplayNumber(44);
-					gameMode = new WwwMode();
-					Timer1.initialize(1000000);
-					Timer1.attachInterrupt(TimerInterrupt);
-					Serial.write("WwwMode!");
-				}
-				else 
-				{
-					if (state == 4)
-					{
-						SystemMethodsObject.SetDisplayNumber(55);
-						gameMode = new BrainRingWithTimerMode();
-						Timer1.initialize(1000000);
-						Timer1.attachInterrupt(TimerInterrupt);
-						Serial.write("BrainRingWithTimerMode!");
-					}
-				}
-			}
-		}
+			break;
+		case 2:
+			SystemMethodsObject.SetDisplayNumber(33);
+			gameMode = new OwnGameMode();
+			Serial.write("OwnGameMode");
+			SetupPlayerInts();
+			break;
+		case 3: 
+			SystemMethodsObject.SetDisplayNumber(44);
+			gameMode = new WwwMode();
+			Timer1.initialize(1000000);
+			Timer1.attachInterrupt(TimerInterrupt);
+			Serial.write("WwwMode!");
+			break;
+		case 4:
+			SystemMethodsObject.SetDisplayNumber(55);
+			gameMode = new BrainRingWithTimerMode();
+			Timer1.initialize(1000000);
+			Timer1.attachInterrupt(TimerInterrupt);
+			Serial.write("BrainRingWithTimerMode!");
+			break;
+		default:
+			break;
 	}
 
 	SystemMethodsObject.SetUserLed(-1);
 	SystemMethodsObject.PlaySound(2000, 1000);
-	SetupAdminInts();*/
+	SetupAdminInts();
+
 }
 
-void loop()
-{
-	for (int i = 0; i < 4; i++)
-	{
-		SystemMethodsObject.SetUserLed(i);
-		//SystemMethodsObject.SetDisplayNumber(i);
-		delay(1000);
-	}
-	
-
-	digitalWrite(Constants.displayShiftRegisterRefresh, HIGH);
-	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
-	digitalWrite(Constants.displayShiftRegisterData, HIGH);
-	
-
-	/*digitalWrite(Constants.ledShiftRegisterClk, HIGH);
-	digitalWrite(Constants.ledShiftRegisterData, HIGH);
-	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
-	digitalWrite(17, HIGH);*/
-}
+void loop(){}
 
 void SetupAdminInts()
 {
@@ -135,14 +109,13 @@ void SetupPlayerInts()
 	enableInterrupt(Constants.firstPlayerButton, Player1Push, RISING);
 	enableInterrupt(Constants.secondPlayerButton, Player2Push, RISING);
 	enableInterrupt(Constants.thirdPlayerButton, Player3Push, RISING);
-	enableInterrupt(Constants.fourthPlayerButton, Player4Push, RISING);
+	enableInterrupt(Constants.fourthPlayerButton, Player4Push, RISING); 
+	enableInterrupt(Constants.fifthPlayerButton, Player5Push, RISING);
 }
 
 void AdminStartPush()
 {
 	noInterrupts();
-	byte piind = PIND;
-	Serial.print(piind);
 	Serial.println("Admin start pressed!");
 	gameMode->AdminButtonPush(Constants.adminSet);
 	interrupts();
@@ -151,8 +124,6 @@ void AdminStartPush()
 void AdminResetPush()
 {
 	noInterrupts();
-	byte piind = PIND;
-	Serial.print(piind);
 	Serial.println("Admin reset pressed!");
 	gameMode->AdminButtonPush(Constants.adminReset);
 	interrupts();
@@ -187,6 +158,14 @@ void Player4Push()
 	noInterrupts();
 	Serial.write("Player 4 pressed!");
 	gameMode->PlayerButtonPush(Constants.player4);
+	interrupts();
+}
+
+void Player5Push()
+{
+	noInterrupts();
+	Serial.write("Player 5 pressed!");
+	gameMode->PlayerButtonPush(Constants.player5);
 	interrupts();
 }
 
