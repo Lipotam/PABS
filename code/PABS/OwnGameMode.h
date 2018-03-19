@@ -17,6 +17,7 @@ private:
 	bool state[5];
 	int status;
 
+	bool CheckAndSetPlayerClick(int playerNumber, int playerPin);
 	void SetPlayerClick(int playerNumber);
 	void ResetState();
 

@@ -12,7 +12,6 @@ OwnGameMode::OwnGameMode()
 }
 OwnGameMode::~OwnGameMode(){}
 
-
 void OwnGameMode::SetPlayerClick(int playerNumber)
 {
 	state[playerNumber] = 1;
@@ -20,6 +19,19 @@ void OwnGameMode::SetPlayerClick(int playerNumber)
 	SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
 	status = 1;
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+}
+
+bool OwnGameMode::CheckAndSetPlayerClick(int playerNumber, int playerPin)
+{
+	if (state[playerNumber] == 0 && digitalRead(playerPin) == HIGH)
+	{
+		SetPlayerClick(playerNumber);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void OwnGameMode::PlayerButtonPush(int playerNumber)
@@ -32,35 +44,15 @@ void OwnGameMode::PlayerButtonPush(int playerNumber)
 		}
 		else
 		{
-			if (state[Constants.player1] == 0 && digitalRead(Constants.firstPlayerButton) == HIGH)
-			{
-				SetPlayerClick(Constants.player1);
-			}
-			else
-			{
-				if (state[Constants.player2] == 0 && digitalRead(Constants.secondPlayerButton) == HIGH)
-				{
-					SetPlayerClick(Constants.player2);
-				}
-				else
-				{
-					if (state[Constants.player3] == 0 && digitalRead(Constants.thirdPlayerButton) == HIGH)
-					{
-						SetPlayerClick(Constants.player3);
-					}
-					else
-					{
-						if (state[Constants.player4] == 0 && digitalRead(Constants.fourthPlayerButton) == HIGH)
-						{
-							SetPlayerClick(Constants.player4);
-						}
-					}
-				}
-			}
+			if (CheckAndSetPlayerClick(Constants.player1, Constants.firstPlayerButton)) return;
+			if (CheckAndSetPlayerClick(Constants.player2, Constants.secondPlayerButton)) return;
+			if (CheckAndSetPlayerClick(Constants.player3, Constants.thirdPlayerButton)) return;
+			if (CheckAndSetPlayerClick(Constants.player4, Constants.fourthPlayerButton)) return;
+			if (CheckAndSetPlayerClick(Constants.player5, Constants.fifthPlayerButton)) return;
 		}
-		
 	}
 }
+
 void OwnGameMode::AdminButtonPush(int buttonNumber)
 {
 	if (buttonNumber == Constants.adminReset)
