@@ -46,7 +46,6 @@ public:
 	int brainFaultStartFrequency;
 	int adminSet;
 	int adminReset;
-	uint8_t digit[12];
 	uint8_t led[6];
 
 	int ownGameMainTimer;

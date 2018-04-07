@@ -9,6 +9,9 @@
 	#include "WProgram.h"
 #endif
 
+#include "LedControl.h"
+
+
 class SystemMethods
 {
 
@@ -16,7 +19,8 @@ class SystemMethods
 	 void SetDisplayNumber(int number, bool faultStart = false);
 	 void SetUserLed(int number);
 	 void PlaySound(int frequency, int milliseconds);
-	void init();
+	 void init();
+	 void initDisplay();
 };
 
 extern SystemMethods SystemMethodsObject;

@@ -1,3 +1,4 @@
+#include <LedControl.h>
 #include <EnableInterrupt.h>
 #include "SystemMethods.h"
 #include "TestMode.h"

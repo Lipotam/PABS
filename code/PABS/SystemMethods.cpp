@@ -4,46 +4,52 @@
 
 #include "SystemMethods.h"
 #include "Constants.h"
+#include <LedControl.h>
+
+LedControl display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
 
 void SystemMethods::init()
 {
-	// do nothing
 }
 
+void SystemMethods::initDisplay()
+{
+	display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
+	display.shutdown(0, false); // включаем дисплей энергосбережение дисплей
+	display.setIntensity(0, 8);// устанвливаем яркость (0-минимум, 15-максимум) 
+	display.clearDisplay(0);// очищаем дисплей 
+}
 
 void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 {
-	digitalWrite(Constants.displayShiftRegisterRefresh, LOW);
-
-
-	if(number == -1)
+		if(number == -1)
 	{
-		shiftOut(Constants.displayShiftRegisterData, Constants.displayShiftRegisterClk, LSBFIRST, Constants.digit[10]);
-		shiftOut(Constants.displayShiftRegisterData, Constants.displayShiftRegisterClk, LSBFIRST, Constants.digit[10]);
+		display.setChar(0, 0, ' ', false);
+		display.setChar(0, 1, ' ', false);
 	}
 	else
 	{
 		int lowDigit = number % 10;
-		int highByte = 0;
 
 		if(faultStart)
 		{
-			highByte = 11;
+			display.setChar(0, 0, 'f', true);
 		}
 		else
 		{
-			highByte= (number / 10) %10;
+			int highByte= (number / 10) %10;
 			if (highByte == 0)
 			{
-				highByte = 10;
+				display.setChar(0, 0, ' ', false);
+			}
+			else
+			{
+				display.setDigit(0, 0, highByte, false);
 			}
 		}
 
-		shiftOut(Constants.displayShiftRegisterData, Constants.displayShiftRegisterClk, LSBFIRST, Constants.digit[lowDigit]);
-		shiftOut(Constants.displayShiftRegisterData, Constants.displayShiftRegisterClk, LSBFIRST, Constants.digit[highByte]);
+		display.setDigit(0, 1, lowDigit, false);
 	}
-
-	digitalWrite(Constants.displayShiftRegisterRefresh, HIGH);
 }
 
 void SystemMethods::SetUserLed(int number)
@@ -68,6 +74,4 @@ void SystemMethods::PlaySound(int frequency, int milliseconds)
 	tone(Constants.speakerPin, frequency, milliseconds); 
 }
 
-
 SystemMethods SystemMethodsObject;
-
