@@ -11,6 +11,9 @@ TestMode::~TestMode(){}
 
 void TestMode::PlayerButtonPush(int playerNumber)
 {
+	Serial.write("Test ");
+	Serial.print(playerNumber);
+	Serial.write(" pressed!");
 	SystemMethodsObject.SetDisplayNumber(playerNumber);
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency * (playerNumber+1),Constants.signalPeriod);

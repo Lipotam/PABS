@@ -22,6 +22,11 @@ void SystemMethods::initDisplay()
 
 void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 {
+
+	Serial.write("Display ");
+	Serial.print(number);
+	Serial.write(" set!");
+
 		if(number == -1)
 	{
 		display.setChar(0, 0, ' ', false);
@@ -62,6 +67,9 @@ void SystemMethods::SetUserLed(int number)
 	}
 	else
 	{
+		Serial.write("Led ");
+		Serial.print(Constants.led[number]);
+		Serial.write(" set!");
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[number]);
 	}
 

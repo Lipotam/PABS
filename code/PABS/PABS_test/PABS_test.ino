@@ -3,16 +3,41 @@
 #include "Constants.h"
 
 void setup() {
+	Serial.begin(9600);
+
+	pinMode(Constants.adminStartButton, INPUT_PULLUP);
+	pinMode(Constants.adminResetButton, INPUT_PULLUP);
+
+	pinMode(Constants.firstPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.secondPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.thirdPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.fourthPlayerButton, INPUT_PULLUP);
+	pinMode(Constants.fifthPlayerButton, INPUT_PULLUP);
+
+	pinMode(Constants.speakerPin, OUTPUT);
+	pinMode(Constants.ledShiftRegisterClk, OUTPUT);
+	pinMode(Constants.ledShiftRegisterData, OUTPUT);
+	pinMode(Constants.ledShiftRegisterRefresh, OUTPUT);
+	pinMode(Constants.displayShiftRegisterClk, OUTPUT);
+	pinMode(Constants.displayShiftRegisterData, OUTPUT);
+	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
+
+
 	SystemMethodsObject.initDisplay();
 }
 
 void loop()
 {
-	test_display();
+	analogWrite(9, 64);
+
+	//analogWrite(6, 128);
+	//test_display();
+	test_leds();
 }
 
 void test_display()
 {
+	Serial.write("Display testing!");
 	SystemMethodsObject.SetDisplayNumber(-1, false);
 	delay(400);
 
@@ -32,4 +57,15 @@ void test_display()
 	}
 }
 
+void test_leds() 
+{
+	Serial.write("Led Testing!");
+	
+	for (int i = 0; i < 5; i++)
+	{
+		SystemMethodsObject.SetUserLed(i);
+		delay(100);
+	}
+	
 
+}
