@@ -21,9 +21,9 @@ ConstantsClass::ConstantsClass()
 	ledShiftRegisterData = A2;
 	ledShiftRegisterRefresh = A3;
 	
-	displayShiftRegisterClk = 6;
+	displayShiftRegisterClk = 4;
 	displayShiftRegisterData = 5;
-	displayShiftRegisterRefresh = 4;
+	displayShiftRegisterRefresh = 6;
 
 	player1 = 0;
 	player2 = 1;
