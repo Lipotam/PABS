@@ -36,11 +36,13 @@ void setup()
 	SystemMethodsObject.PlaySound(1000, 1000);
 	Serial.write("Started!");
 
+	SystemMethodsObject.initDisplay();
+
 	int state = 0;
-	while (digitalRead(Constants.adminStartButton) == HIGH)
+	while (digitalRead(Constants.adminStartButton) != HIGH)
 	{
 		SystemMethodsObject.SetDisplayNumber(state);
-		if (digitalRead(Constants.adminResetButton) != HIGH)
+		if (digitalRead(Constants.adminResetButton) == HIGH)
 		{
 			state++;
 			if (state > 4)
