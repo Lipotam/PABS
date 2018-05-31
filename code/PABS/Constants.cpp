@@ -15,11 +15,11 @@ ConstantsClass::ConstantsClass()
 	fourthPlayerButton = 8;
 	fifthPlayerButton = 7;
 
-	speakerPin = 13;
+	speakerPin = 12;
 
-	ledShiftRegisterClk = A2;
-	ledShiftRegisterData = A3;
-	ledShiftRegisterRefresh = A4;
+	ledShiftRegisterClk = A4;
+	ledShiftRegisterData = A2;
+	ledShiftRegisterRefresh = A3;
 	
 	displayShiftRegisterClk = 6;
 	displayShiftRegisterData = 5;
@@ -40,12 +40,12 @@ ConstantsClass::ConstantsClass()
 	adminSet = 0;
 	adminReset = 1;
 
-	led[0] = 0b00000000;
-	led[1] = 0b00000001;
-	led[2] = 0b00000010;
-	led[3] = 0b00000100;
-	led[4] = 0b00001000;
-	led[5] = 0b00010000;
+	led[5] = 0b00000000;
+	led[0] = 0b00000001;
+	led[1] = 0b00000010;
+	led[2] = 0b00000100;
+	led[3] = 0b00001000;
+	led[4] = 0b00010000;
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;
