@@ -196,3 +196,4 @@ FakesAssemblies/
 *.opt
 Circuit diagram/Backup Of PABSv3.pdsbak
 Circuit diagram/Last Loaded PABSv3.pdsbak
+*.bak
