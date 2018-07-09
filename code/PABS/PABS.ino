@@ -58,32 +58,32 @@ void setup()
 	switch (state)
 	{
 		case 0: 
-			SystemMethodsObject.SetDisplayNumber(11);
+			SystemMethodsObject.SetDisplayNumber(0);
 			gameMode = new TestMode();
 			Serial.write("TestMode");
 			SetupPlayerInts();
 			break;
 		case 1: 
-			SystemMethodsObject.SetDisplayNumber(22);
+			SystemMethodsObject.SetDisplayNumber(11);
 			gameMode = new BrainRingMode();
 			Serial.write("BrainMode");
 			SetupPlayerInts();
 			break;
 		case 2:
-			SystemMethodsObject.SetDisplayNumber(33);
+			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new OwnGameMode();
 			Serial.write("OwnGameMode");
 			SetupPlayerInts();
 			break;
 		case 3: 
-			SystemMethodsObject.SetDisplayNumber(44);
+			SystemMethodsObject.SetDisplayNumber(33);
 			gameMode = new WwwMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
 			Serial.write("WwwMode!");
 			break;
 		case 4:
-			SystemMethodsObject.SetDisplayNumber(55);
+			SystemMethodsObject.SetDisplayNumber(44);
 			gameMode = new BrainRingWithTimerMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
