@@ -13,11 +13,10 @@
 
 class BrainRingWithTimerMode : public BrainRingMode
 {
-private:
-	bool state[5];
-	int status; // 0 - default, 1 - timer, 2 - user clicked, 3 - fault start
-	int timer;
+	//status 0 - default, 1 - timer, 2 - user clicked, 3 - fault start
 
+private:
+	int timer;
 	void ResetState();
 
 public:

@@ -48,7 +48,6 @@ void BrainRingWithTimerMode::AdminButtonPush(int buttonNumber)
 	{
 		ResetState();
 		SystemMethodsObject.SetDisplayNumber(-1);
-		SystemMethodsObject.SetUserLed(-1);
 	}
 	else
 	{
