@@ -39,11 +39,15 @@ public:
 	int player5;
 
 	int signalPeriod;
+	int timeIsEndingPeriod;
+
 	int playerSignalPeriodFrequency;
 	int adminSignalPeriodFrequency;
 	int wwwTenSecondsLeftFrequency;
 	int wwwPeriodExpiredFrequency;
 	int brainFaultStartFrequency;
+	int timeIsEndingFrequency;
+
 	int adminSet;
 	int adminReset;
 	uint8_t led[6];

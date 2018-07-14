@@ -8,13 +8,13 @@
 #include "BrainRingWithTimerMode.h"
 #include "GameModeBase.h"
 #include "Constants.h"
-#include "TimerOne.h"  
+#include "TimerOne.h"
 
 GameModeBase* gameMode;
 
 void setup()
 {
-	Serial.begin(9600);
+	SystemMethodsObject.SetupSerial();
 
 	pinMode(Constants.adminStartButton, INPUT_PULLUP);
 	pinMode(Constants.adminResetButton, INPUT_PULLUP);
@@ -34,7 +34,7 @@ void setup()
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
 
 	SystemMethodsObject.PlaySound(1000, 1000);
-	Serial.write("Started!");
+	SystemMethodsObject.WriteDebug("Started!");
 
 	SystemMethodsObject.initDisplay();
 
@@ -60,19 +60,19 @@ void setup()
 		case 0: 
 			SystemMethodsObject.SetDisplayNumber(0);
 			gameMode = new TestMode();
-			Serial.write("TestMode");
+			SystemMethodsObject.WriteDebug("TestMode");
 			SetupPlayerInts();
 			break;
 		case 1: 
 			SystemMethodsObject.SetDisplayNumber(11);
 			gameMode = new BrainRingMode();
-			Serial.write("BrainMode");
+			SystemMethodsObject.WriteDebug("BrainMode");
 			SetupPlayerInts();
 			break;
 		case 2:
 			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new OwnGameMode();
-			Serial.write("OwnGameMode");
+			SystemMethodsObject.WriteDebug("OwnGameMode");
 			SetupPlayerInts();
 			break;
 		case 3: 
@@ -80,14 +80,15 @@ void setup()
 			gameMode = new WwwMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
-			Serial.write("WwwMode!");
+			SystemMethodsObject.WriteDebug("WwwMode!");
 			break;
 		case 4:
 			SystemMethodsObject.SetDisplayNumber(44);
 			gameMode = new BrainRingWithTimerMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
-			Serial.write("BrainRingWithTimerMode!");
+			SystemMethodsObject.WriteDebug("BrainRingWithTimerMode!");
+			SetupPlayerInts();
 			break;
 		default:
 			break;
@@ -119,7 +120,7 @@ void SetupPlayerInts()
 void AdminStartPush()
 {
 	noInterrupts();
-	Serial.println("Admin start pressed!");
+	SystemMethodsObject.WriteDebug("Admin start pressed!");
 	gameMode->AdminButtonPush(Constants.adminSet);
 	interrupts();
 }
@@ -127,7 +128,7 @@ void AdminStartPush()
 void AdminResetPush()
 {
 	noInterrupts();
-	Serial.println("Admin reset pressed!");
+	SystemMethodsObject.WriteDebug("Admin reset pressed!");
 	gameMode->AdminButtonPush(Constants.adminReset);
 	interrupts();
 }
@@ -135,7 +136,7 @@ void AdminResetPush()
 void Player1Push()
 {
 	noInterrupts();
-	Serial.write("Player 1 pressed!");
+	SystemMethodsObject.WriteDebug("Player 1 pressed!");
 	gameMode->PlayerButtonPush(Constants.player1);
 	interrupts();
 }
@@ -143,7 +144,7 @@ void Player1Push()
 void Player2Push()
 {
 	noInterrupts();
-	Serial.write("Player 2 pressed!");
+	SystemMethodsObject.WriteDebug("Player 2 pressed!");
 	gameMode->PlayerButtonPush(Constants.player2);
 	interrupts();
 }
@@ -151,7 +152,7 @@ void Player2Push()
 void Player3Push()
 {
 	noInterrupts();
-	Serial.write("Player 3 pressed!");
+	SystemMethodsObject.WriteDebug("Player 3 pressed!");
 	gameMode->PlayerButtonPush(Constants.player3);
 	interrupts();
 }
@@ -159,7 +160,7 @@ void Player3Push()
 void Player4Push()
 {
 	noInterrupts();
-	Serial.write("Player 4 pressed!");
+	SystemMethodsObject.WriteDebug("Player 4 pressed!");
 	gameMode->PlayerButtonPush(Constants.player4);
 	interrupts();
 }
@@ -167,7 +168,7 @@ void Player4Push()
 void Player5Push()
 {
 	noInterrupts();
-	Serial.write("Player 5 pressed!");
+	SystemMethodsObject.WriteDebug("Player 5 pressed!");
 	gameMode->PlayerButtonPush(Constants.player5);
 	interrupts();
 }

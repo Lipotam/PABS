@@ -59,7 +59,7 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	{
 		ResetState();
 		SystemMethodsObject.SetUserLed(-1);
-		SystemMethodsObject.SetDisplayNumber(-1);
+		SystemMethodsObject.ClearDisplay();
 	}
 	else
 	{
@@ -68,7 +68,7 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 			status = 0;
 			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 			SystemMethodsObject.SetUserLed(-1);
-			SystemMethodsObject.SetDisplayNumber(-1);
+			SystemMethodsObject.ClearDisplay();
 		}
 	}
 }

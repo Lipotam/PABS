@@ -47,7 +47,7 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		SystemMethodsObject.SetDisplayNumber(-1);
+		SystemMethodsObject.ClearDisplay();
 		SystemMethodsObject.SetUserLed(-1);
 	}
 	else
@@ -55,7 +55,7 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 		if(buttonNumber == Constants.adminSet)
 		{
 			status = 1;
-			SystemMethodsObject.SetDisplayNumber(-1);
+			SystemMethodsObject.ClearDisplay();
 			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 			SystemMethodsObject.SetUserLed(-1);
 		}

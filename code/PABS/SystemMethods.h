@@ -17,10 +17,15 @@ class SystemMethods
 
  public:
 	 void SetDisplayNumber(int number, bool faultStart = false);
+	 void ClearDisplay();
 	 void SetUserLed(int number);
 	 void PlaySound(int frequency, int milliseconds);
 	 void init();
 	 void initDisplay();
+
+	 void SetupSerial();
+	 void WriteDebug(char* message);
+	 void WriteDebug(int number);
 };
 
 extern SystemMethods SystemMethodsObject;

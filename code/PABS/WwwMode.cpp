@@ -24,7 +24,7 @@ void WwwMode::AdminButtonPush(int buttonNumber)
 	{
 		state = 0;
 		timeLeft = 0;
-		SystemMethodsObject.SetDisplayNumber(-1);
+		SystemMethodsObject.ClearDisplay();
 		
 	}
 	else
@@ -49,7 +49,22 @@ void WwwMode::TimerPush(){
 			SystemMethodsObject.PlaySound(Constants.wwwTenSecondsLeftFrequency, Constants.signalPeriod);
 		}
 
+		if (timeLeft < 0)
+		{
+			SystemMethodsObject.PlaySound(Constants.timeIsEndingFrequency, Constants.timeIsEndingPeriod);
+		}
+
 		if (timeLeft == 0)
+		{
+			SystemMethodsObject.PlaySound(Constants.wwwPeriodExpiredFrequency, Constants.signalPeriod);
+		}
+
+		if (timeLeft < 0)
+		{
+			SystemMethodsObject.PlaySound(Constants.timeIsEndingFrequency, Constants.timeIsEndingPeriod);
+		}
+
+		if (timeLeft == -11)
 		{
 			SystemMethodsObject.PlaySound(Constants.wwwPeriodExpiredFrequency, Constants.signalPeriod);
 			state = 0;

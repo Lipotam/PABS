@@ -47,19 +47,19 @@ void BrainRingWithTimerMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
-		SystemMethodsObject.SetDisplayNumber(-1);
+		SystemMethodsObject.ClearDisplay();
 	}
 	else
 	{
 		if (buttonNumber == Constants.adminSet)
 		{
-			if (status == 3)
+			if (status == 2 || status == 3)
 			{
 				timer = Constants.brainRingSecondaryTimer;
 			}
 
 			status = 1;
-			SystemMethodsObject.SetDisplayNumber(-1);
+			SystemMethodsObject.ClearDisplay();
 			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 			SystemMethodsObject.SetUserLed(-1);
 		}
@@ -71,6 +71,11 @@ void BrainRingWithTimerMode::TimerPush() {
 	{
 		timer--;
 		SystemMethodsObject.SetDisplayNumber(timer);
+
+		if (timer < 5)
+		{
+			SystemMethodsObject.PlaySound(Constants.timeIsEndingFrequency, Constants.timeIsEndingPeriod);
+		}
 
 		if (timer ==0)
 		{

@@ -4,7 +4,9 @@
 
 #include "SystemMethods.h"
 #include "Constants.h"
-#include <LedControl.h>
+
+
+#define DEBUG
 
 LedControl display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
 
@@ -15,46 +17,55 @@ void SystemMethods::init()
 void SystemMethods::initDisplay()
 {
 	display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
-	display.shutdown(0, false); // включаем дисплей энергосбережение дисплей
-	display.setIntensity(0, 8);// устанвливаем яркость (0-минимум, 15-максимум) 
-	display.clearDisplay(0);// очищаем дисплей 
+	display.shutdown(0, false);
+	display.setIntensity(0, 8); 
+	display.clearDisplay(0); 
 }
 
 void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 {
+	SystemMethodsObject.WriteDebug("Display ");
+	SystemMethodsObject.WriteDebug(number);
+	SystemMethodsObject.WriteDebug(" set!");
 
-	Serial.write("Display ");
-	Serial.print(number);
-	Serial.write(" set!");
+	bool dotsEnable = false;
 
-		if(number == -1)
+	if (number < 0)
 	{
-		display.setChar(0, 0, ' ', false);
-		display.setChar(0, 1, ' ', false);
+		number = number * -1;
+		dotsEnable = true;
+	}
+
+	int lowDigit = number % 10;
+
+	if(faultStart)
+	{
+		display.setChar(0, 0, 'f', true);
 	}
 	else
 	{
-		int lowDigit = number % 10;
+		
 
-		if(faultStart)
+		int highByte= (number / 10) %10;
+		if (highByte == 0)
 		{
-			display.setChar(0, 0, 'f', true);
+			display.setChar(0, 0, ' ', dotsEnable);
 		}
 		else
 		{
-			int highByte= (number / 10) %10;
-			if (highByte == 0)
-			{
-				display.setChar(0, 0, ' ', false);
-			}
-			else
-			{
-				display.setDigit(0, 0, highByte, false);
-			}
+			display.setDigit(0, 0, highByte, dotsEnable);
 		}
-
-		display.setDigit(0, 1, lowDigit, false);
 	}
+
+	display.setDigit(0, 1, lowDigit, dotsEnable);
+	
+}
+
+
+void SystemMethods::ClearDisplay()
+{
+	display.setChar(0, 0, ' ', false);
+	display.setChar(0, 1, ' ', false);
 }
 
 void SystemMethods::SetUserLed(int number)
@@ -67,9 +78,9 @@ void SystemMethods::SetUserLed(int number)
 	}
 	else
 	{
-		Serial.write("Led ");
-		Serial.print(Constants.led[number]);
-		Serial.write(" set!");
+		SystemMethodsObject.WriteDebug("Led ");
+		SystemMethodsObject.WriteDebug(Constants.led[number]);
+		SystemMethodsObject.WriteDebug(" set!");
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[number]);
 	}
 
@@ -80,6 +91,27 @@ void SystemMethods::PlaySound(int frequency, int milliseconds)
 {
 	noTone(Constants.speakerPin);
 	tone(Constants.speakerPin, frequency, milliseconds); 
+}
+
+void SystemMethods::SetupSerial()
+{
+	#ifdef DEBUG
+		Serial.begin(9600);
+	#endif
+}
+
+void SystemMethods::WriteDebug(char* message) 
+{
+	#ifdef DEBUG
+		Serial.write(message);
+	#endif
+}
+
+void SystemMethods::WriteDebug(int number)
+{
+#ifdef DEBUG
+	Serial.write(number);
+#endif
 }
 
 SystemMethods SystemMethodsObject;
