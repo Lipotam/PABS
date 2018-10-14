@@ -33,23 +33,33 @@ void setup()
 	pinMode(Constants.displayShiftRegisterData, OUTPUT);
 	pinMode(Constants.displayShiftRegisterRefresh, OUTPUT);
 
-	SystemMethodsObject.PlaySound(1000, 1000);
+	
 	SystemMethodsObject.WriteDebug("Started!");
 
 	SystemMethodsObject.initDisplay();
 
 	int state = 0;
-	while (digitalRead(Constants.adminStartButton) != HIGH)
+
+	if (digitalRead(Constants.adminResetButton) != HIGH) 
 	{
-		SystemMethodsObject.SetDisplayNumber(state);
-		if (digitalRead(Constants.adminResetButton) == HIGH)
+		// set Brain mode as default
+		state = 1;
+	}
+	else
+	{
+		SystemMethodsObject.PlaySound(1000, 1000);
+		while (digitalRead(Constants.adminStartButton) != HIGH)
 		{
-			state++;
-			if (state > 4)
+			SystemMethodsObject.SetDisplayNumber(state);
+			if (digitalRead(Constants.adminResetButton) == HIGH)
 			{
-				state = 0;
+				state++;
+				if (state > 4)
+				{
+					state = 0;
+				}
+				delay(200);
 			}
-			delay(200);
 		}
 	}
 
@@ -58,32 +68,27 @@ void setup()
 	switch (state)
 	{
 		case 0: 
-			SystemMethodsObject.SetDisplayNumber(0);
 			gameMode = new TestMode();
 			SystemMethodsObject.WriteDebug("TestMode");
 			SetupPlayerInts();
 			break;
 		case 1: 
-			SystemMethodsObject.SetDisplayNumber(11);
 			gameMode = new BrainRingMode();
 			SystemMethodsObject.WriteDebug("BrainMode");
 			SetupPlayerInts();
 			break;
 		case 2:
-			SystemMethodsObject.SetDisplayNumber(22);
 			gameMode = new OwnGameMode();
 			SystemMethodsObject.WriteDebug("OwnGameMode");
 			SetupPlayerInts();
 			break;
 		case 3: 
-			SystemMethodsObject.SetDisplayNumber(33);
 			gameMode = new WwwMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
 			SystemMethodsObject.WriteDebug("WwwMode!");
 			break;
 		case 4:
-			SystemMethodsObject.SetDisplayNumber(44);
 			gameMode = new BrainRingWithTimerMode();
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
