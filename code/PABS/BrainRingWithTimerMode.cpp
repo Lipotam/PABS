@@ -17,6 +17,7 @@ void BrainRingWithTimerMode::PlayerButtonPush(int playerNumber)
 	if (status == 0)
 	{
 		status = 3;
+		blockStartButton = true;
 		state[playerNumber] = 1;
 		SystemMethodsObject.SetUserLed(playerNumber);
 		SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
@@ -53,15 +54,21 @@ void BrainRingWithTimerMode::AdminButtonPush(int buttonNumber)
 	{
 		if (buttonNumber == Constants.adminSet)
 		{
-			if (status == 2 || status == 3)
-			{
-				timer = Constants.brainRingSecondaryTimer;
+			if (blockStartButton) {
+				blockStartButton = false;
 			}
+			else
+			{
+				if (status == 2 || status == 3)
+				{
+					timer = Constants.brainRingSecondaryTimer;
+				}
 
-			status = 1;
-			SystemMethodsObject.ClearDisplay();
-			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
-			SystemMethodsObject.SetUserLed(-1);
+				status = 1;
+				SystemMethodsObject.ClearDisplay();
+				SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
+				SystemMethodsObject.SetUserLed(-1);
+			}
 		}
 	}
 }

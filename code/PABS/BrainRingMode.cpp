@@ -52,7 +52,7 @@ void BrainRingMode::AdminButtonPush(int buttonNumber)
 	}
 	else
 	{
-		if(buttonNumber == Constants.adminSet)
+		if(status != 2 && buttonNumber == Constants.adminSet)
 		{
 			status = 1;
 			SystemMethodsObject.ClearDisplay();
