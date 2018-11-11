@@ -18,6 +18,7 @@ class BrainRingWithTimerMode : public BrainRingMode
 private:
 	int timer;
 	void ResetState();
+	bool blockStartButton; // too allow to see fault start 
 
 public:
 	BrainRingWithTimerMode();
