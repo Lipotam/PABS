@@ -19,6 +19,7 @@ class SystemMethods
 	 void SetDisplayNumber(int number, bool faultStart = false);
 	 void ClearDisplay();
 	 void SetUserLed(int number);
+	 void SetUserLedWithByte(uint8_t rawData);
 	 void PlaySound(int frequency, int milliseconds);
 	 void init();
 	 void initDisplay();

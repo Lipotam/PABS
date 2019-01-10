@@ -87,6 +87,14 @@ void SystemMethods::SetUserLed(int number)
 	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
 }
 
+
+void SystemMethods::SetUserLedWithByte(uint8_t rawData)
+{
+	digitalWrite(Constants.ledShiftRegisterRefresh, LOW);
+	shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, rawData);
+	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
+}
+
 void SystemMethods::PlaySound(int frequency, int milliseconds)
 {
 	noTone(Constants.speakerPin);
