@@ -43,8 +43,8 @@ void setup()
 
 	if (digitalRead(Constants.adminResetButton) != HIGH) 
 	{
-		// set Brain mode as default
-		state = 1;
+		// set Klimovich SE Brain mode as default
+		state = 5;
 	}
 	else
 	{
@@ -94,6 +94,11 @@ void setup()
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
 			SystemMethodsObject.WriteDebug("BrainRingWithTimerMode!");
+			SetupPlayerInts();
+			break;
+		case 5:
+			gameMode = new KlimovichSEBrainRingMode();
+			SystemMethodsObject.WriteDebug("Klimovich SE BrainMode");
 			SetupPlayerInts();
 			break;
 		default:

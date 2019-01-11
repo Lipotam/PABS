@@ -22,13 +22,13 @@ void KlimovichSEBrainRingMode::PlayerButtonPush(int playerNumber)
 
 		if(playerNumber == 0)
 		{
-			SystemMethodsObject.SetUserLedWithByte(0b01000001);
+			SystemMethodsObject.SetUserLedWithByte(0b00100001);
 		}
 		else
 		{
 			if (playerNumber == 1)
 			{
-				SystemMethodsObject.SetUserLedWithByte(0b00100010);
+				SystemMethodsObject.SetUserLedWithByte(0b01000010);
 			}
 			else
 			{
@@ -43,15 +43,9 @@ void KlimovichSEBrainRingMode::PlayerButtonPush(int playerNumber)
 	{
 		if (status == 1)
 		{
-			if (state[playerNumber] == 0)
-			{
-				SetPlayerPush(playerNumber);
-			}
-			else
-			{
 				if (playerNumber == 0)
 				{
-					SystemMethodsObject.SetUserLedWithByte(0b01010001);
+					SystemMethodsObject.SetUserLedWithByte(0b00110001);
 					SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
 					status = 2;
 					SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
@@ -60,7 +54,7 @@ void KlimovichSEBrainRingMode::PlayerButtonPush(int playerNumber)
 				{
 					if (playerNumber == 1)
 					{
-						SystemMethodsObject.SetUserLedWithByte(0b00110010);
+						SystemMethodsObject.SetUserLedWithByte(0b01010010);
 						SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
 						status = 2;
 						SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
@@ -75,7 +69,6 @@ void KlimovichSEBrainRingMode::PlayerButtonPush(int playerNumber)
 				if (CheckAndSetPlayerPush(Constants.player3, Constants.thirdPlayerButton)) return;
 				if (CheckAndSetPlayerPush(Constants.player4, Constants.fourthPlayerButton)) return;
 				if (CheckAndSetPlayerPush(Constants.player5, Constants.fifthPlayerButton)) return;
-			}
 		}
 	}
 }
