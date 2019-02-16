@@ -43,8 +43,8 @@ void setup()
 
 	if (digitalRead(Constants.adminResetButton) != HIGH) 
 	{
-		// set Klimovich SE Brain mode as default
-		state = 5;
+		// set Brain mode as default
+		state = 1;
 	}
 	else
 	{

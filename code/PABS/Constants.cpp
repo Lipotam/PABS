@@ -33,11 +33,11 @@ ConstantsClass::ConstantsClass()
 
 	signalPeriod = 600;
 	timeIsEndingPeriod = 300;
-	playerSignalPeriodFrequency = 1000;
-	brainFaultStartFrequency = 900;
-	adminSignalPeriodFrequency = 2000;
-	wwwTenSecondsLeftFrequency = 2000;
-	wwwPeriodExpiredFrequency = 3000;
+	playerSignalPeriodFrequency = 3800;
+	brainFaultStartFrequency = 3650;
+	adminSignalPeriodFrequency = 3950;
+	wwwTenSecondsLeftFrequency = 3500;
+	wwwPeriodExpiredFrequency = 3800;
 
 	timeIsEndingFrequency = 500;
 
