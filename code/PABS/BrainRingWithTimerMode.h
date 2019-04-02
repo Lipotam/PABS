@@ -16,12 +16,13 @@ class BrainRingWithTimerMode : public BrainRingMode
 	//status 0 - default, 1 - timer, 2 - user clicked, 3 - fault start
 
 private:
-	int timer;
+	int timer, modeTimer;
 	void ResetState();
 	bool blockStartButton; // too allow to see fault start 
 
 public:
 	BrainRingWithTimerMode();
+	BrainRingWithTimerMode(int timer);
 	~BrainRingWithTimerMode();
 
 	virtual void PlayerButtonPush(int playerNumber);

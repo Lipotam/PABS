@@ -8,8 +8,16 @@
 
 BrainRingWithTimerMode::BrainRingWithTimerMode()
 {
+	BrainRingWithTimerMode(Constants.brainRingMainTimer);
+}
+
+BrainRingWithTimerMode::BrainRingWithTimerMode(int timer)
+{
+	modeTimer = timer;
 	ResetState();
 }
+
+
 BrainRingWithTimerMode::~BrainRingWithTimerMode() {}
 
 void BrainRingWithTimerMode::PlayerButtonPush(int playerNumber)
@@ -95,5 +103,5 @@ void BrainRingWithTimerMode::TimerPush() {
 void BrainRingWithTimerMode::ResetState()
 {
 	BrainRingMode::ResetState();
-	timer = Constants.brainRingMainTimer;
+	timer = modeTimer;
 }

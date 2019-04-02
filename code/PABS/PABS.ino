@@ -39,6 +39,9 @@ void setup()
 
 	SystemMethodsObject.initDisplay();
 
+	SystemMethodsObject.SetUserLed(-1);
+	SystemMethodsObject.ClearDisplay();
+
 	int state = 0;
 
 	if (digitalRead(Constants.adminResetButton) != HIGH) 
@@ -55,7 +58,7 @@ void setup()
 			if (digitalRead(Constants.adminResetButton) == HIGH)
 			{
 				state++;
-				if (state > 4)
+				if (state > 5)
 				{
 					state = 0;
 				}
@@ -90,13 +93,20 @@ void setup()
 			SystemMethodsObject.WriteDebug("WwwMode!");
 			break;
 		case 4:
-			gameMode = new BrainRingWithTimerMode();
+			gameMode = new BrainRingWithTimerMode(30);
 			Timer1.initialize(1000000);
 			Timer1.attachInterrupt(TimerInterrupt);
-			SystemMethodsObject.WriteDebug("BrainRingWithTimerMode!");
+			SystemMethodsObject.WriteDebug("BrainRingWithTimerMode 30!");
 			SetupPlayerInts();
 			break;
 		case 5:
+			gameMode = new BrainRingWithTimerMode(60);
+			Timer1.initialize(1000000);
+			Timer1.attachInterrupt(TimerInterrupt);
+			SystemMethodsObject.WriteDebug("BrainRingWithTimerMode 60!");
+			SetupPlayerInts();
+			break;
+		case 6:
 			gameMode = new KlimovichSEBrainRingMode();
 			SystemMethodsObject.WriteDebug("Klimovich SE BrainMode");
 			SetupPlayerInts();
@@ -106,9 +116,9 @@ void setup()
 	}
 
 	SystemMethodsObject.SetUserLed(-1);
+	SystemMethodsObject.ClearDisplay();
 	SystemMethodsObject.PlaySound(2000, 1000);
 	SetupAdminInts();
-
 }
 
 void loop(){}
