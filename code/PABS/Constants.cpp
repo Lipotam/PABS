@@ -44,12 +44,12 @@ ConstantsClass::ConstantsClass()
 	adminSet = 0;
 	adminReset = 1;
 
-	led[5] = 0b00000000;
-	led[0] = 0b00000001;
-	led[1] = 0b00000010;
-	led[2] = 0b00000100;
-	led[3] = 0b00001000;
-	led[4] = 0b00010000;
+	led[5] = 0b11100000;
+	led[0] = 0b10100001;
+	led[1] = 0b11000010;
+	led[2] = 0b10100100;
+	led[3] = 0b11001000;
+	led[4] = 0b11110000;
 
 	ownGameMainTimer= 30;
 	ownGameSecondaryTimer = 10;
