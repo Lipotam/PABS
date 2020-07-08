@@ -197,3 +197,6 @@ FakesAssemblies/
 Circuit diagram/Backup Of PABSv3.pdsbak
 Circuit diagram/Last Loaded PABSv3.pdsbak
 *.bak
+*.pdsbak
+code/PABS/PABS_test/__vm/
+code/PABS/__vm/

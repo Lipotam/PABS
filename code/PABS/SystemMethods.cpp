@@ -18,7 +18,7 @@ void SystemMethods::initDisplay()
 {
 	display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
 	display.shutdown(0, false);
-	display.setIntensity(0, 8); 
+	display.setIntensity(0, 15); 
 	display.clearDisplay(0); 
 }
 
@@ -58,7 +58,10 @@ void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 	}
 
 	display.setDigit(0, 1, lowDigit, dotsEnable);
-	
+
+	digitalWrite(Constants.displayShiftRegisterRefresh, LOW);
+	digitalWrite(Constants.displayShiftRegisterClk, LOW);
+	digitalWrite(Constants.displayShiftRegisterData, LOW);
 }
 
 
