@@ -1,4 +1,3 @@
-#include <LedControl.h>
 #include "SystemMethods.h"
 #include "Constants.h"
 
@@ -28,16 +27,18 @@ void setup() {
 
 void loop()
 {
-	analogWrite(9, 64);
+
+
+	//analogWrite(9, 64);
 
 	//analogWrite(6, 128);
-	//test_display();
-	test_leds();
+	test_display();
+	//test_leds();
 }
 
 void test_display()
 {
-	Serial.write("Display testing!");
+	SystemMethodsObject.WriteDebug("Display testing!");
 	SystemMethodsObject.SetDisplayNumber(-1, false);
 	delay(400);
 
@@ -59,7 +60,7 @@ void test_display()
 
 void test_leds() 
 {
-	Serial.write("Led Testing!");
+	SystemMethodsObject.WriteDebug("Led Testing!");
 	
 	for (int i = 0; i < 5; i++)
 	{

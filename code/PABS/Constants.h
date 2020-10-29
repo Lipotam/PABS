@@ -51,6 +51,7 @@ public:
 	int adminSet;
 	int adminReset;
 	uint8_t led[6];
+	uint8_t digit[12];
 
 	int ownGameMainTimer;
 	int ownGameSecondaryTimer;
