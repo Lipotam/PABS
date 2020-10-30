@@ -201,3 +201,5 @@ Circuit diagram/Last Loaded PABSv3.pdsbak
 code/PABS/PABS_test/__vm/
 code/PABS/__vm/
 Circuit diagram/bestsave.rte
+*.dwl
+*.dwl2
