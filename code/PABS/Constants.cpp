@@ -9,6 +9,9 @@ ConstantsClass::ConstantsClass()
 	adminStartButton = 3;
 	adminResetButton = 2;
 
+	parallelInInterruptPin = 13;
+	parallelOutInterruptPin = A0;
+
 	firstPlayerButton = 11;
 	secondPlayerButton = 10;
 	thirdPlayerButton = 9;

@@ -19,11 +19,13 @@ class BrainRingMode : public GameModeBase
 
 	 virtual void PlayerButtonPush(int playerNumber);
 	 virtual void AdminButtonPush(int buttonNumber);
+	 virtual void ParallelInterruptPush();
 	 virtual void TimerPush();
 
   protected:
 		bool state[5];
 		int status;
+		bool noParallelInterrupt;
 
 		bool CheckAndSetPlayerPush(int playerNumber, int playerPin);
 		void SetPlayerPush(int playerNumber);

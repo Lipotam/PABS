@@ -2,7 +2,7 @@
 // 
 // 
 
-#define OldDisplay
+//#define OldDisplay
 #define DEBUG
 
 #include "SystemMethods.h"
@@ -69,6 +69,12 @@ void SystemMethods::ClearDisplay()
 	display.setChar(0, 1, ' ', false);
 }
 
+void SystemMethods::SetDashesDisplay()
+{
+	display.setChar(0, 0, '-', false);
+	display.setChar(0, 1, '-', false);
+}
+
 #else
 
 void SystemMethods::initDisplay()
@@ -124,6 +130,14 @@ void SystemMethods::ClearDisplay()
 	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
 }
 
+void SystemMethods::SetDashesDisplay()
+{
+	digitalWrite(Constants.displayShiftRegisterClk, LOW);
+	ShiftToDisplay(0b11111101, false);
+	ShiftToDisplay(0b11111101, false);
+	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
+}
+
 void SystemMethods::ShiftToDisplay(uint8_t rawData, bool addDot)
 {
 	if (addDot)
@@ -168,6 +182,15 @@ void SystemMethods::PlaySound(int frequency, int milliseconds)
 {
 	noTone(Constants.speakerPin);
 	tone(Constants.speakerPin, frequency, milliseconds);
+}
+
+void SystemMethods::RaiseParallelInterrupt()
+{
+	digitalWrite(Constants.parallelOutInterruptPin, HIGH);
+}
+void SystemMethods::LowerParallelInterrupt()
+{
+	digitalWrite(Constants.parallelOutInterruptPin, LOW);
 }
 
 void SystemMethods::SetupSerial()

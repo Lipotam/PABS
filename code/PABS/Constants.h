@@ -15,6 +15,8 @@ public:
 
 	int  adminStartButton;
 	int adminResetButton;
+	int parallelInInterruptPin;
+	int parallelOutInterruptPin;
 
 	int firstPlayerButton;
 	int secondPlayerButton;

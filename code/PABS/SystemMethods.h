@@ -22,6 +22,7 @@ class SystemMethods
  public:
 	 void SetDisplayNumber(int number, bool faultStart = false);
 	 void ClearDisplay();
+	 void SetDashesDisplay();
 	 void SetUserLed(int number);
 	 void SetUserLedWithByte(uint8_t rawData);
 	 void PlaySound(int frequency, int milliseconds);
@@ -30,6 +31,9 @@ class SystemMethods
 	 void SetupSerial();
 	 void WriteDebug(char* message);
 	 void WriteDebug(int number);
+
+	 void RaiseParallelInterrupt();
+	 void LowerParallelInterrupt();
 
 private:
 	 void ShiftToDisplay(uint8_t rawData, bool faultStart);

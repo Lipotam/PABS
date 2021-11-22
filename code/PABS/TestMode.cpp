@@ -18,6 +18,7 @@ void TestMode::PlayerButtonPush(int playerNumber)
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency * (playerNumber+1),Constants.signalPeriod);
 }
+
 void TestMode::AdminButtonPush(int buttonNumber)
 {
 	SystemMethodsObject.SetDisplayNumber(10+buttonNumber);
@@ -26,3 +27,4 @@ void TestMode::AdminButtonPush(int buttonNumber)
 }
 
 void TestMode::TimerPush(){};
+void TestMode::ParallelInterruptPush(){};

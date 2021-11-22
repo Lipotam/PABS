@@ -67,6 +67,8 @@ void BrainRingMode::TimerPush(){};
 void BrainRingMode::ResetState()
 {
 	SystemMethodsObject.SetUserLed(-1);
+	SystemMethodsObject.LowerParallelInterrupt();
+	noParallelInterrupt = false;
 	status = 0;
 	state[0] = 0;
 	state[1] = 0;
@@ -89,9 +91,19 @@ bool BrainRingMode::CheckAndSetPlayerPush(int playerNumber, int playerPin) {
 }
 
 void BrainRingMode::SetPlayerPush(int playerNumber) {
+	status = 2;
+	noParallelInterrupt = true;
+	SystemMethodsObject.RaiseParallelInterrupt();
 	state[playerNumber] = 1;
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
-	status = 2;
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+}
+
+void BrainRingMode::ParallelInterruptPush() {
+	if(!noParallelInterrupt)
+	{
+		status = 2;
+		SystemMethodsObject.SetDashesDisplay();
+	}
 }

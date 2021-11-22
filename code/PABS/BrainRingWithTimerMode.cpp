@@ -92,7 +92,7 @@ void BrainRingWithTimerMode::TimerPush() {
 			SystemMethodsObject.PlaySound(Constants.timeIsEndingFrequency, Constants.timeIsEndingPeriod);
 		}
 
-		if (timer ==0)
+		if (timer == 0)
 		{
 			status = 2;
 			SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
@@ -103,5 +103,16 @@ void BrainRingWithTimerMode::TimerPush() {
 void BrainRingWithTimerMode::ResetState()
 {
 	BrainRingMode::ResetState();
+	SystemMethodsObject.LowerParallelInterrupt();
+	noParallelInterrupt = false;
 	timer = modeTimer;
+}
+
+void BrainRingWithTimerMode::ParallelInterruptPush() {
+
+	if (!noParallelInterrupt)
+	{
+		status = 3;
+		SystemMethodsObject.SetDashesDisplay();
+	}
 }
