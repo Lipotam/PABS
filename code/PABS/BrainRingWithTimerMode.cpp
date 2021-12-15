@@ -24,6 +24,8 @@ void BrainRingWithTimerMode::PlayerButtonPush(int playerNumber)
 {
 	if (status == 0)
 	{
+        noParallelInterrupt = true;
+        SystemMethodsObject.RaiseParallelInterrupt();
 		status = 3;
 		blockStartButton = true;
 		state[playerNumber] = 1;

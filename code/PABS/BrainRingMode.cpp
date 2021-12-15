@@ -17,6 +17,8 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 	if (status == 0)
 	{
 		status= 2;
+        noParallelInterrupt = true;
+        SystemMethodsObject.RaiseParallelInterrupt();
 		state[playerNumber] = 1;
 		SystemMethodsObject.SetUserLed(playerNumber);
 		SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
