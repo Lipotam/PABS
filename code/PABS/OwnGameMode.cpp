@@ -14,7 +14,7 @@ OwnGameMode::~OwnGameMode() {}
 
 void OwnGameMode::SetPlayerClick(int playerNumber)
 {
-	noParallelInterrupt = false;
+	noParallelInterrupt = true;
 	SystemMethodsObject.RaiseParallelInterrupt();
 	state[playerNumber] = 1;
 	SystemMethodsObject.SetUserLed(playerNumber);
