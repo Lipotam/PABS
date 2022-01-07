@@ -114,7 +114,19 @@ void BrainRingWithTimerMode::ParallelInterruptPush() {
 
 	if (!noParallelInterrupt)
 	{
-		status = 3;
+    int currentStatus = status;
+    status = 3;
+   
+    SystemMethodsObject.SetDashesDisplay();
+    if (currentStatus == 0)
+    {
+        SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
+    }
+    else
+    {
+      SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
+    }
+		
 		SystemMethodsObject.SetDashesDisplay();
 	}
 }
