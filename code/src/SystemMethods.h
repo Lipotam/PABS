@@ -9,8 +9,6 @@
 	#include "WProgram.h"
 #endif
 
-
-
 #ifdef OldDisplay
 #include "LedControl.h"
 #endif
@@ -29,7 +27,7 @@ class SystemMethods
 	 void initDisplay();
 
 	 void SetupSerial();
-	 void WriteDebug(char* message);
+	 void WriteDebug(const char* message);
 	 void WriteDebug(int number);
 
 	 void RaiseParallelInterrupt();

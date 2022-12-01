@@ -200,7 +200,7 @@ void SystemMethods::SetupSerial()
 #endif
 }
 
-void SystemMethods::WriteDebug(char* message)
+void SystemMethods::WriteDebug(const char* message)
 {
 #ifdef DEBUG
 	Serial.write(message);

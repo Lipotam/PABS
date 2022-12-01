@@ -12,6 +12,21 @@
 
 GameModeBase* gameMode;
 
+void AdminResetPush();
+void AdminStartPush();
+void SetupAdminInts();
+void TimerInterrupt();
+void SetupPlayerInts();
+
+void Player1Push();
+void Player2Push();
+void Player3Push();
+void Player4Push();
+void Player5Push();
+
+void ParallelInterruptPush();
+
+
 void setup()
 {
 	SystemMethodsObject.SetupSerial();
