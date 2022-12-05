@@ -10,12 +10,10 @@ OwnGameMode::OwnGameMode()
 {
 	ResetState();
 }
-OwnGameMode::~OwnGameMode() {}
+OwnGameMode::~OwnGameMode(){}
 
 void OwnGameMode::SetPlayerClick(int playerNumber)
 {
-	noParallelInterrupt = true;
-	SystemMethodsObject.RaiseParallelInterrupt();
 	state[playerNumber] = 1;
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
@@ -40,7 +38,7 @@ void OwnGameMode::PlayerButtonPush(int playerNumber)
 {
 	if (status == 0)
 	{
-		if (state[playerNumber] == 0)
+		if(state[playerNumber] == 0)
 		{
 			SetPlayerClick(playerNumber);
 		}
@@ -60,40 +58,25 @@ void OwnGameMode::AdminButtonPush(int buttonNumber)
 	if (buttonNumber == Constants.adminReset)
 	{
 		ResetState();
+		SystemMethodsObject.SetUserLed(-1);
+		SystemMethodsObject.ClearDisplay();
 	}
 	else
 	{
-		if (buttonNumber == Constants.adminSet)
+		if(buttonNumber == Constants.adminSet)
 		{
 			status = 0;
 			SystemMethodsObject.PlaySound(Constants.adminSignalPeriodFrequency, Constants.signalPeriod);
 			SystemMethodsObject.SetUserLed(-1);
 			SystemMethodsObject.ClearDisplay();
-
 		}
 	}
 }
 
-void OwnGameMode::ParallelInterruptPush()
-{
-	if (!noParallelInterrupt)
-	{
-		status = 1;
-		SystemMethodsObject.SetDashesDisplay();
-	}
-}
-
-
-
-void OwnGameMode::TimerPush() {};
-
-
+void OwnGameMode::TimerPush(){};
 void OwnGameMode::ResetState()
 {
-	SystemMethodsObject.ClearDisplay();
-	SystemMethodsObject.LowerParallelInterrupt();
 	SystemMethodsObject.SetUserLed(-1);
-	noParallelInterrupt = false;
 	status = 0;
 	state[0] = 0;
 	state[1] = 0;

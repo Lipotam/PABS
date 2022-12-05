@@ -17,8 +17,6 @@ void BrainRingMode::PlayerButtonPush(int playerNumber)
 	if (status == 0)
 	{
 		status= 2;
-        noParallelInterrupt = true;
-        SystemMethodsObject.RaiseParallelInterrupt();
 		state[playerNumber] = 1;
 		SystemMethodsObject.SetUserLed(playerNumber);
 		SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
@@ -69,8 +67,6 @@ void BrainRingMode::TimerPush(){};
 void BrainRingMode::ResetState()
 {
 	SystemMethodsObject.SetUserLed(-1);
-	SystemMethodsObject.LowerParallelInterrupt();
-	noParallelInterrupt = false;
 	status = 0;
 	state[0] = 0;
 	state[1] = 0;
@@ -93,29 +89,9 @@ bool BrainRingMode::CheckAndSetPlayerPush(int playerNumber, int playerPin) {
 }
 
 void BrainRingMode::SetPlayerPush(int playerNumber) {
-	status = 2;
-	noParallelInterrupt = true;
-	SystemMethodsObject.RaiseParallelInterrupt();
 	state[playerNumber] = 1;
 	SystemMethodsObject.SetUserLed(playerNumber);
 	SystemMethodsObject.SetDisplayNumber(playerNumber + 1);
+	status = 2;
 	SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-}
-
-void BrainRingMode::ParallelInterruptPush() {
-	if(!noParallelInterrupt)
-	{
-    int currentStatus = status;
-		status = 2;
-   
-		SystemMethodsObject.SetDashesDisplay();
-    if (currentStatus == 0)
-    {
-        SystemMethodsObject.PlaySound(Constants.brainFaultStartFrequency, Constants.signalPeriod);
-    }
-    else
-    {
-      SystemMethodsObject.PlaySound(Constants.playerSignalPeriodFrequency, Constants.signalPeriod);
-    }
-  }
 }

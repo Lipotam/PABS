@@ -27,11 +27,7 @@ public:
 
 	virtual void PlayerButtonPush(int playerNumber);
 	virtual void AdminButtonPush(int buttonNumber);
-	virtual void ParallelInterruptPush();
 	virtual void TimerPush();
-
-protected:
-	bool noParallelInterrupt;
 };
 #endif
 

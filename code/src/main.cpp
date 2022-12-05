@@ -1,4 +1,5 @@
 #include "KlimovichSEBrainRingMode.h"
+#include <LedControl.h>
 #include <EnableInterrupt.h>
 #include "SystemMethods.h"
 #include "TestMode.h"
@@ -24,17 +25,12 @@ void Player3Push();
 void Player4Push();
 void Player5Push();
 
-void ParallelInterruptPush();
-
-
 void setup()
 {
 	SystemMethodsObject.SetupSerial();
 
 	pinMode(Constants.adminStartButton, INPUT_PULLUP);
 	pinMode(Constants.adminResetButton, INPUT_PULLUP);
-	pinMode(Constants.parallelInInterruptPin, INPUT_PULLUP);
-	pinMode(Constants.parallelOutInterruptPin, OUTPUT);
 
 	pinMode(Constants.firstPlayerButton, INPUT_PULLUP);
 	pinMode(Constants.secondPlayerButton, INPUT_PULLUP);
@@ -53,7 +49,6 @@ void setup()
 	
 	SystemMethodsObject.WriteDebug("Started!");
 
-	digitalWrite(Constants.parallelOutInterruptPin, LOW);
 	SystemMethodsObject.initDisplay();
 
 	SystemMethodsObject.SetUserLed(-1);
@@ -144,8 +139,6 @@ void SetupAdminInts()
 {
 	enableInterrupt(Constants.adminResetButton, AdminResetPush, RISING);
 	enableInterrupt(Constants.adminStartButton, AdminStartPush, RISING);
-
-	enableInterrupt(Constants.parallelInInterruptPin, ParallelInterruptPush, RISING);
 }
 
 void SetupPlayerInts()
@@ -170,14 +163,6 @@ void AdminResetPush()
 	noInterrupts();
 	SystemMethodsObject.WriteDebug("Admin reset pressed!");
 	gameMode->AdminButtonPush(Constants.adminReset);
-	interrupts();
-}
-
-void ParallelInterruptPush()
-{
-	noInterrupts();
-	SystemMethodsObject.WriteDebug("Parallel interrupt pressed!");
-	gameMode->ParallelInterruptPush();
 	interrupts();
 }
 

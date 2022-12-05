@@ -2,17 +2,17 @@
 // 
 // 
 
-//#define OldDisplay
-#define DEBUG
-
 #include "SystemMethods.h"
 #include "Constants.h"
 
-#ifdef OldDisplay
 
-#include <LedControl.h>
+#define DEBUG
 
 LedControl display = LedControl(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterClk, Constants.displayShiftRegisterData, 1);
+
+void SystemMethods::init()
+{
+}
 
 void SystemMethods::initDisplay()
 {
@@ -38,13 +38,15 @@ void SystemMethods::SetDisplayNumber(int number, bool faultStart)
 
 	int lowDigit = number % 10;
 
-	if (faultStart)
+	if(faultStart)
 	{
 		display.setChar(0, 0, 'f', true);
 	}
 	else
 	{
-		int highByte = (number / 10) % 10;
+		
+
+		int highByte= (number / 10) %10;
 		if (highByte == 0)
 		{
 			display.setChar(0, 0, ' ', dotsEnable);
@@ -69,94 +71,11 @@ void SystemMethods::ClearDisplay()
 	display.setChar(0, 1, ' ', false);
 }
 
-void SystemMethods::SetDashesDisplay()
-{
-	display.setChar(0, 0, '-', false);
-	display.setChar(0, 1, '-', false);
-}
-
-#else
-
-void SystemMethods::initDisplay()
-{
-	ClearDisplay();
-}
-
-void SystemMethods::SetDisplayNumber(int number, bool faultStart)
-{
-	SystemMethodsObject.WriteDebug("Display ");
-	SystemMethodsObject.WriteDebug(number);
-	SystemMethodsObject.WriteDebug(" set!");
-
-	digitalWrite(Constants.displayShiftRegisterClk, LOW);
-
-	bool dotsEnable = false;
-
-	if (number < 0)
-	{
-		number = number * -1;
-		dotsEnable = true;
-	}
-
-	int lowDigit = number % 10;
-
-	ShiftToDisplay(Constants.digit[lowDigit], dotsEnable);
-
-	if (faultStart)
-	{
-		ShiftToDisplay(Constants.digit[11], true);
-	}
-	else
-	{
-		int highByte = (number / 10) % 10;
-		if (highByte == 0)
-		{
-			ShiftToDisplay(Constants.digit[10], dotsEnable);
-		}
-		else
-		{
-			ShiftToDisplay(Constants.digit[highByte], dotsEnable);
-		}
-	}
-
-	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
-}
-
-void SystemMethods::ClearDisplay()
-{
-	digitalWrite(Constants.displayShiftRegisterClk, LOW);
-	ShiftToDisplay(Constants.digit[10], false);
-	ShiftToDisplay(Constants.digit[10], false);
-	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
-}
-
-void SystemMethods::SetDashesDisplay()
-{
-	digitalWrite(Constants.displayShiftRegisterClk, LOW);
-	ShiftToDisplay(0b11111101, false);
-	ShiftToDisplay(0b11111101, false);
-	digitalWrite(Constants.displayShiftRegisterClk, HIGH);
-}
-
-void SystemMethods::ShiftToDisplay(uint8_t rawData, bool addDot)
-{
-	if (addDot)
-	{
-		shiftOut(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterData, LSBFIRST, rawData & 0b11111110 );
-	}
-	else
-	{
-		shiftOut(Constants.displayShiftRegisterRefresh, Constants.displayShiftRegisterData, LSBFIRST, rawData);
-	}
-}
-
-#endif
-
 void SystemMethods::SetUserLed(int number)
 {
 	digitalWrite(Constants.ledShiftRegisterRefresh, LOW);
 
-	if (number == -1)
+	if(number ==-1)
 	{
 		shiftOut(Constants.ledShiftRegisterData, Constants.ledShiftRegisterClk, LSBFIRST, Constants.led[5]);
 	}
@@ -171,6 +90,7 @@ void SystemMethods::SetUserLed(int number)
 	digitalWrite(Constants.ledShiftRegisterRefresh, HIGH);
 }
 
+
 void SystemMethods::SetUserLedWithByte(uint8_t rawData)
 {
 	digitalWrite(Constants.ledShiftRegisterRefresh, LOW);
@@ -181,36 +101,27 @@ void SystemMethods::SetUserLedWithByte(uint8_t rawData)
 void SystemMethods::PlaySound(int frequency, int milliseconds)
 {
 	noTone(Constants.speakerPin);
-	tone(Constants.speakerPin, frequency, milliseconds);
-}
-
-void SystemMethods::RaiseParallelInterrupt()
-{
-	digitalWrite(Constants.parallelOutInterruptPin, HIGH);
-}
-void SystemMethods::LowerParallelInterrupt()
-{
-	digitalWrite(Constants.parallelOutInterruptPin, LOW);
+	tone(Constants.speakerPin, frequency, milliseconds); 
 }
 
 void SystemMethods::SetupSerial()
 {
-#ifdef DEBUG
-	Serial.begin(9600);
-#endif
+	#ifdef DEBUG
+		Serial.begin(9600);
+	#endif
 }
 
-void SystemMethods::WriteDebug(const char* message)
+void SystemMethods::WriteDebug(const char* message) 
 {
-#ifdef DEBUG
-	Serial.write(message);
-#endif
+	#ifdef DEBUG
+		Serial.write(message);
+	#endif
 }
 
 void SystemMethods::WriteDebug(int number)
 {
 #ifdef DEBUG
-	Serial.print(number);
+	Serial.write(number);
 #endif
 }
 
