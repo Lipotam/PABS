@@ -4,6 +4,7 @@
 #include "TestMode.h"
 #include "WwwMode.h"
 #include "OwnGameMode.h"
+#include "HamsaMode.h"
 #include "BrainRingMode.h"
 #include "BrainRingWithTimerMode.h"
 #include "GameModeBase.h"
@@ -52,6 +53,7 @@ void setup()
 
 	
 	SystemMethodsObject.WriteDebug("Started!");
+	SystemMethodsObject.WriteDebug("v6.3");
 
 	digitalWrite(Constants.parallelOutInterruptPin, LOW);
 	SystemMethodsObject.initDisplay();
@@ -75,7 +77,13 @@ void setup()
 			if (digitalRead(Constants.adminResetButton) == HIGH)
 			{
 				state++;
-				if (state > 5)
+
+				if (state == 6) // we have Klimovich mode for the index 6.
+				{
+					state = 7;
+				}
+
+				if (state > 7)
 				{
 					state = 0;
 				}
@@ -126,6 +134,13 @@ void setup()
 		case 6:
 			gameMode = new KlimovichSEBrainRingMode();
 			SystemMethodsObject.WriteDebug("Klimovich SE BrainMode");
+			SetupPlayerInts();
+			break;
+		case 7:
+			gameMode = new HamsaMode();
+			Timer1.initialize(1000000);
+			Timer1.attachInterrupt(TimerInterrupt);
+			SystemMethodsObject.WriteDebug("HamsaMode");
 			SetupPlayerInts();
 			break;
 		default:
